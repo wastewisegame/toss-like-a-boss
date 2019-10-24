@@ -1,0 +1,77 @@
+@font-face {
+  font-family: truckin;
+  src: url(../../font/KeeponTruckin.ttf);
+}
+@font-face {
+  font-family: scoreboard;
+  src: url(../../font/scoreboardfont.ttf);
+}
+@font-face {
+  font-family: chunk;
+  src: url(../../font/chunk.otf);
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 10px;
+  background-image: url(../../img/Lake.JPG);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  background-size: cover
+}
+
+.alert {
+  background-color: #ff4545;
+  margin: 50px;
+}
+
+.login {
+  background-color: #f1f1f1;
+  width: 30%;
+  height: 250px;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+input {
+  margin: 5px;
+  margin-bottom: 10px;
+  width: 70%;
+}
+
+.log-in,
+.log-out,
+.register,
+.link-button {
+  background-color: #00acb0;
+  border-radius: 4px;
+  color: #f8f8f8;
+  min-height: 50px;
+  min-width: 100px;
+  outline: 0;
+  cursor: pointer;
+  align-content: center;
+}
+
+.log-in:hover,
+.log-out:hover,
+.register:hover {
+  background-color: #008183;
+}
+
+/* This line makes the "Register" and "Login" buttons look like links */
+.link-button {
+  background-color: darkseagreen;
+  /* background:none; */
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: 0;
+  border-bottom: 1px solid #444;
+  cursor: pointer;
+}
