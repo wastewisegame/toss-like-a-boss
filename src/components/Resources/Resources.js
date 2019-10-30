@@ -50,7 +50,7 @@ const styles = {
 class Resources extends Component {
 
 goToWasteWise = () => {
-  window.open("http://www.mnwastewise.org/", "_blank");
+  window.open("https://www.mnchamber.com/your-opportunity/waste-wise", "_blank");
 }
 
   render() {
@@ -61,8 +61,7 @@ goToWasteWise = () => {
         </Grid>
         <Grid container justify={"center"}>
           <p className={this.props.classes.p}>
-            Checkout this link bellow for more information on the Minnesota
-            Waste Wise website
+            Check out this link below for more information on Minnesota Waste Wise!
           </p>
         </Grid>
         <Grid container justify={"center"}>
