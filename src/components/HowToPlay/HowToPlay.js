@@ -61,7 +61,7 @@ class HowToPlay extends Component {
             unmountOnExit>
             <div className={this.props.classes.howToDiv}>
               <h1 className={this.props.classes.header}>
-                1. The game will start with a piece of trash on screen that
+                1. The game will start with a piece of waste on screen that
                 needs to be sorted
               </h1>
               <Button
@@ -84,7 +84,7 @@ class HowToPlay extends Component {
             unmountOnExit>
             <div className={this.props.classes.howToDiv}>
               <h1 className={this.props.classes.header}>
-                2. The player must select the correct bin to place the trash
+                2. The player must select the correct bin to place the waste
                 into
               </h1>
               <Button

@@ -162,6 +162,9 @@ class RegisterPage extends Component {
           accessCode: this.state.accessCode
         }
       });
+
+      this.props.history.push('/settingsorg')
+      
     } else {
       this.props.dispatch({ type: "REGISTRATION_INPUT_ERROR" });
     }
