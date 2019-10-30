@@ -116,7 +116,8 @@ class Nav extends React.Component {
               <Tab
                 label="PLAY"
                 component={Link}
-                to="/gamelaunch"
+                to={this.props.state.currentContestInfo.access_code ? (`/gamelaunch?contest=${this.props.state.currentContestInfo.access_code}`)
+               : ("/gamelaunch")}
                 icon={
                   <Icon
                     path={mdiGamepadSquare}
