@@ -67,6 +67,7 @@ function* getTeamNames(action) {
   try {
     let id = action.payload
     const response = yield axios.get(`/api/team/names/${id}`)
+    console.log('the get team names response', response.data)
     yield put ({
       type: 'SET_TEAM_NAMES',
       payload: response.data
