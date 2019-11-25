@@ -26,6 +26,7 @@ import imageUrlReducer from './imageUrlReducer';
 import currentContestInfo from './currentContestInfoReducer';
 import companyIdNumberReducer from './companyIdNumberReducer';
 import teamIdNumberReducer from './teamIdNumberReducer';
+import adminGameStatistics from './adminGameStatistics';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -61,6 +62,7 @@ const rootReducer = combineReducers({
   currentContestInfo, //grabs current contest info for date/time validation
   companyIdNumberReducer, //grabs company ID number
   teamIdNumberReducer, //holds team id number for current player
+  adminGameStatistics, //holds game statistics
 });
 
 export default rootReducer;
