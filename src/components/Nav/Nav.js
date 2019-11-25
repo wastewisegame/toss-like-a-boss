@@ -147,6 +147,23 @@ class Nav extends React.Component {
                 }
               />
             )}
+            {this.props.user.wastewise_admin && (
+              <Tab
+                label="Settings"
+                component={Link}
+                to="/settingsadmin"
+                icon={
+                  <Icon
+                    path={mdiSettingsBox}
+                    title="Settings"
+                    size={2}
+                    horizontal
+                    rotate={360}
+                    color="green"
+                  />
+                }
+              />
+            )}
             {this.props.user.id && !this.props.user.wastewise_admin && (
               <Tab
                 label="Settings"

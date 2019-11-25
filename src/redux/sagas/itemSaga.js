@@ -14,6 +14,19 @@ function* fetchItems(action) {
     }
 }
 
+function* fetchGameStatistics(action) {
+    try {
+        let response = yield axios.get('/api/item/statistics')
+        console.log('fetch game statistics repsonse:', response.data)
+        yield put({
+            type: 'SET_GAME_STATISTICS',
+            payload: response.data
+        })
+    } catch (error) {
+        console.log('error in fetch game statistics', error);
+    }
+}
+
 function* addItem(action) {
     try {
         let response = yield axios.post('/api/item/admin', action.payload)
@@ -107,6 +120,7 @@ function* itemSaga() {
     yield takeEvery('UPLOAD_IMAGE', uploadImage);
     yield takeEvery('UPDATE_ITEM', updateItem);
     yield takeEvery('ADD_ITEM_IMAGE', addItemImage);
+    yield takeEvery('FETCH_GAME_STATISTICS', fetchGameStatistics);
 }
 
 export default itemSaga;

@@ -21,6 +21,7 @@ import ResultsGuestPlayer from "../ResultsGuestPlayer/ResultsGuestPlayer";
 import SettingsOrganization from "../SettingsOrganization/SettingsOrganization";
 import SettingsAdmin from "../SettingsAdmin/SettingsAdmin";
 import RegisterPage from "../RegisterPage/RegisterPage";
+import AdminGameData from "../AdminGameData/AdminGameData";
 
 //Styling
 import { ThemeProvider } from "@material-ui/styles";
@@ -68,6 +69,7 @@ class App extends Component {
                     <ProtectedRoute exact path="/settingsorg" component={SettingsOrganization} />
                     <AdminRoute exact path="/settingsadmin" component={SettingsAdmin} />
                     <ProtectedRoute exact path="/leaderboard" component={Leaderboard} />
+                    <ProtectedRoute exact path="/admingamedata" component ={AdminGameData} />
                     {/* If none of the other routes matched, we will show a 404. */}
                     <Route render={() => <h1>404</h1>} />
                   </Switch>
