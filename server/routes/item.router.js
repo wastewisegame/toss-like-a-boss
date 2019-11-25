@@ -102,6 +102,18 @@ router.delete('/admin/:id', rejectUnauthenticated, rejectNotAdmin, (req, res) =>
         })
 })
 
+//GAME STATISTICS
+router.get('/statistics', rejectUnauthenticated, rejectNotAdmin, (req, res) => {
+    const sqlText = `SELECT * FROM "item" ORDER BY "id" ASC;`;
+    pool.query(sqlText)
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            res.sendStatus(500);
+        })
+})
+
 //IMAGE UPLOAD
 
 router.post('/admin/upload', rejectUnauthenticated, rejectNotAdmin, upload.any(), (req, res) => {
