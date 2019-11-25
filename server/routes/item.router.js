@@ -107,7 +107,7 @@ router.get('/statistics', rejectUnauthenticated, rejectNotAdmin, (req, res) => {
     const sqlText = `SELECT * FROM "item" ORDER BY "id" ASC;`;
     pool.query(sqlText)
         .then(result => {
-            res.sendStatus(200);
+            res.send(result.rows);
         })
         .catch(error => {
             res.sendStatus(500);

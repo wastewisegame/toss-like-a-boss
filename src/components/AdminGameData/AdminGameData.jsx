@@ -17,13 +17,21 @@ class AdminGameData extends Component {
 
     render() {
         let gameStatsArray = [];
-        // if (this.props.gameStats) {
-        //     gameStatsArray = this.props.gameStats.map(item => {
-        //         return (
-
-        //         )
-        //     })
-        // }
+        if (this.props.gameStats) {
+            gameStatsArray = this.props.gameStats.map(row => {
+                return (
+                    <TableRow key={row.id} >
+                        <TableCell>{row.id}</TableCell>
+                        <TableCell>{row.name}</TableCell>
+                        <TableCell>{row.receptacle}</TableCell>
+                        <TableCell>{row.correct_count}</TableCell>
+                        <TableCell>{row.number_of_instances} - {row.correct_count}</TableCell>
+                        <TableCell>{row.number_of_instances}</TableCell>
+                        <TableCell>({row.correct_count} / {row.number_of_instances})*100</TableCell>
+                    </TableRow>
+                )
+            })
+        }
         return (
             <div>
                 <h1>Game Statistics</h1>
@@ -41,7 +49,8 @@ class AdminGameData extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <TableRow>
+                            {gameStatsArray}
+                            {/* <TableRow>
                                 <TableCell>1</TableCell>
                                 <TableCell>Test Name</TableCell>
                                 <TableCell>Receptacle</TableCell>
@@ -49,7 +58,7 @@ class AdminGameData extends Component {
                                 <TableCell>5</TableCell>
                                 <TableCell>10</TableCell>
                                 <TableCell>50%</TableCell>
-                            </TableRow>
+                            </TableRow> */}
                         </TableBody>
                     </Table>
                 </Paper>
