@@ -19,15 +19,22 @@ class AdminGameData extends Component {
         let gameStatsArray = [];
         if (this.props.gameStats) {
             gameStatsArray = this.props.gameStats.map(row => {
+                //variables to make table returned below more readable
+                let correctCount = parseInt(row.correct_count)
+                let numberOfInstances = parseInt(row.number_of_instances)
+                let incorrectCount = numberOfInstances = correctCount
+
+                console.log(`correct count is ${correctCount}`)
                 return (
                     <TableRow key={row.id} >
                         <TableCell>{row.id}</TableCell>
                         <TableCell>{row.name}</TableCell>
                         <TableCell>{row.receptacle}</TableCell>
-                        <TableCell>{row.correct_count}</TableCell>
-                        <TableCell>{row.number_of_instances} - {row.correct_count}</TableCell>
-                        <TableCell>{row.number_of_instances}</TableCell>
-                        <TableCell>({row.correct_count} / {row.number_of_instances})*100</TableCell>
+                        <TableCell>{correctCount}</TableCell>
+                        <TableCell>{incorrectCount}</TableCell>
+                        <TableCell>{numberOfInstances}</TableCell>
+                        {/* this will perform math for percentage to two decimal places */}
+                        <TableCell>{(parseFloat(row.correct_count / row.number_of_instances)*100).toFixed(2)}</TableCell>
                     </TableRow>
                 )
             })
@@ -45,7 +52,7 @@ class AdminGameData extends Component {
                                 <TableCell>Correct</TableCell>
                                 <TableCell>Incorrect</TableCell>
                                 <TableCell>Total</TableCell>
-                                <TableCell>%</TableCell>
+                                <TableCell>% Correct</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
