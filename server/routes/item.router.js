@@ -104,7 +104,7 @@ router.delete('/admin/:id', rejectUnauthenticated, rejectNotAdmin, (req, res) =>
 
 //GAME STATISTICS
 router.get('/statistics', rejectUnauthenticated, rejectNotAdmin, (req, res) => {
-    const sqlText = `SELECT * FROM "item" ORDER BY "id" ASC;`;
+    const sqlText = `SELECT "id","name","receptacle","correct_count","number_of_instances" FROM "item" ORDER BY "id" ASC;`;
     pool.query(sqlText)
         .then(result => {
             res.send(result.rows);

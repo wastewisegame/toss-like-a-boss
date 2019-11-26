@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import AdminGameDataTable from './AdminGameDataTable';
 
+//material ui elements
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+
+import MUIDataTable from "mui-datatables";
 
 class AdminGameData extends Component {
     componentDidMount() {
@@ -25,6 +29,7 @@ class AdminGameData extends Component {
                 let incorrectCount = numberOfInstances = correctCount
 
                 console.log(`correct count is ${correctCount}`)
+                console.log(`game stats array is ${gameStatsArray}`)
                 return (
                     <TableRow key={row.id} >
                         <TableCell>{row.id}</TableCell>
@@ -39,10 +44,12 @@ class AdminGameData extends Component {
                 )
             })
         }
+
         return (
             <div>
-                <h1>Game Statistics</h1>
                 <Paper>
+                <h1>Game Statistics</h1>
+                <AdminGameDataTable />
                     <Table>
                         <TableHead>
                             <TableRow>

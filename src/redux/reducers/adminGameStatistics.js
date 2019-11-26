@@ -1,4 +1,4 @@
-const adminGameStatistics = (state = [], action) => {
+const adminGameStatistics = (state = [{}], action) => {
     switch (action.type) {
         case 'SET_GAME_STATISTICS':
             return action.payload;
