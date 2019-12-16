@@ -72,8 +72,6 @@ class SettingsAdmin extends Component {
                     {!this.state.items && <Button className={classes.button} variant="contained" name="items" color="secondary" onClick={() => this.handleDisplay()}>Items</Button>}
                     {this.state.items && <Button className={classes.button} variant="contained" name="users" color="secondary" onClick={() => this.handleDisplay()}>Users</Button>}
                     {!this.state.items && <Button className={classes.button} variant="contained" name="users" color="primary">Users</Button>}
-                    {this.state.items && <Button className={classes.button} variant="containted" name="data" color="secondary" onClick={() => this.handleDisplay()}>Data</Button>}
-                    {!this.state.items && <Button className={classes.button} variant="contained" name="data" color="primary">Data</Button>}
                 </div>
                 {this.state.items && <h2>Items<Fastfood className={classes.icon} /></h2>}
                 {this.state.items && <Items/>}
