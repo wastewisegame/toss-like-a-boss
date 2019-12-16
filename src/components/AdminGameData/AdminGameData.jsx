@@ -24,9 +24,9 @@ class AdminGameData extends Component {
         if (this.props.gameStats) {
             gameStatsArray = this.props.gameStats.map(row => {
                 //variables to make table returned below more readable
-                let correctCount = parseInt(row.correct_count)
-                let numberOfInstances = parseInt(row.number_of_instances)
-                let incorrectCount = numberOfInstances = correctCount
+                let correctCount = parseInt(row.correct_count);
+                let numberOfInstances = parseInt(row.number_of_instances);
+                let incorrectCount = numberOfInstances - correctCount;
 
                 return (
                     <TableRow key={row.id} >
