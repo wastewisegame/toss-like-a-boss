@@ -20,6 +20,7 @@ import { mdiSettingsBox } from "@mdi/js";
 import { mdiHelpCircle } from "@mdi/js";
 import { mdiAccountPlus } from "@mdi/js";
 import { mdiDoorClosedLock } from "@mdi/js";
+import { mdiTableLarge } from '@mdi/js';
 
 
 function TabContainer(props) {
@@ -149,13 +150,13 @@ class Nav extends React.Component {
             )}
             {this.props.user.wastewise_admin && (
               <Tab
-                label="Settings"
+                label="Data"
                 component={Link}
-                to="/settingsadmin"
+                to="/admingamedata"
                 icon={
                   <Icon
-                    path={mdiSettingsBox}
-                    title="Settings"
+                    path={mdiTableLarge}
+                    title="Data"
                     size={2}
                     horizontal
                     rotate={360}
@@ -258,12 +259,6 @@ Nav.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-
-// // Instead of taking everything from state, we just want the user
-// // object to determine if they are logged in
-// // if they are logged in, we show them a few more links
-// // if you wanted you could write this code like this:
-// // const mapStateToProps = ({ user }) => ({ user });
 const mapStateToProps = state => ({
   state,
   user: state.user

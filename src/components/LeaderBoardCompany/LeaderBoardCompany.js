@@ -30,7 +30,6 @@ const styles = theme => ({
 class Leaderboard extends Component {
   componentDidMount() {
     this.getLeaderboardInfo();
-    console.log(this.props)
   };
 
   componentDidUpdate(prevProps) {

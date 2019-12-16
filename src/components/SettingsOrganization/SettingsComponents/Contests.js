@@ -199,7 +199,6 @@ class Contests extends Component {
     handleAdd = (event) => {
         event.preventDefault();
         this.generateAccessId();
-        console.log('We are getting to the handle Add')
         this.props.dispatch({
             type: 'ADD_CONTEST',
             payload: this.state
@@ -274,7 +273,6 @@ class Contests extends Component {
 
         //Contest list variable, containing a loop to display all contests in the database to the DOM in a table format.
         let contestList = this.props.contest.map(contest => {
-            console.log('the mapped over contest is', contest)
             return (
                 <tr>
                     <td className={classes.cardContentIconsLeft}>

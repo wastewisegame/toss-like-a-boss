@@ -28,8 +28,6 @@ class AdminGameData extends Component {
                 let numberOfInstances = parseInt(row.number_of_instances)
                 let incorrectCount = numberOfInstances = correctCount
 
-                console.log(`correct count is ${correctCount}`)
-                console.log(`game stats array is ${gameStatsArray}`)
                 return (
                     <TableRow key={row.id} >
                         <TableCell>{row.id}</TableCell>

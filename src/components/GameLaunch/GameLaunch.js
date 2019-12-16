@@ -165,7 +165,6 @@ class GameLaunch extends Component {
   }
 
   componentWillUnmount() {
-    console.log('UMOUNTED, TEAM NAME IS', this.state.teamName)
     this.props.dispatch({
       type: 'FETCH_TEAM_ID_NUMBER',
       payload: {
@@ -177,12 +176,10 @@ class GameLaunch extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.currentContest !== prevProps.currentContest) {
-      console.log('there has been a change in props!')
     }
   }
 
   getContestInfo(contestId) {
-    console.log('currently the contest id is', contestId)
     this.props.dispatch({
       type: "FETCH_CURRENT_CONTEST_INFO",
       payload: contestId
@@ -212,7 +209,6 @@ toGame = () => {
   this.setState({
     timeToPlay: true
   });
-  console.log(this.state);
 };
 
 handleSubmit = event => {
@@ -263,7 +259,6 @@ handleLeaderboardClick = () => {
   }
 
 render() {
-  console.log(this.state);
 
   let teamNameArray = this.props.teamNames.map(name => {
     return <MenuItem value={name.team_name}>{name.team_name}</MenuItem>;

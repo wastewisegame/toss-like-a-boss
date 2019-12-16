@@ -94,10 +94,8 @@ class ResultsGuestPlayer extends Component {
 
 
     render() {
-        console.log('the CONTEST INFO is', this.props.organizationInfo);
         
         const scorePercentage = parseInt((this.props.gameScore / 15) * 100);
-        console.log(scorePercentage);
         return (
             <div>
                 <div className={this.props.classes.resultsDiv}>
