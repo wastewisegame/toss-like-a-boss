@@ -289,7 +289,7 @@ render() {
     <div className={this.props.classes.mainDiv}>
       <Typography classes={this.props.classes.nameHeader} component="div">
         <Box fontFamily='chunk' fontSize="h1.fontSize" textAlign="center">
-          TOSS LIKE A BOSS
+          KNOW WHAT TO THROW
                   </Box>
       </Typography>
       <div>
@@ -298,7 +298,6 @@ render() {
             <Button
               className={this.props.classes.HowToPlayButton}
               onClick={this.howToPlay}>
-              <Help />
               How To Play
                 </Button>
           </div>
@@ -313,7 +312,7 @@ render() {
             <div>
               <Typography component="div" gutterBottom>
                 <Box fontSize="h5.fontSize" textAlign="center">
-                  Welcome to TOSS LIKE A BOSS, the drag and drop game that tests your recycling skills
+                  Welcome to KNOW WHAT TO THROW, the game that tests your recycling skills
                   </Box>
               </Typography>
             </div>
@@ -344,7 +343,6 @@ render() {
               <Button
                 className={this.props.classes.PlayButton}
                 onClick={this.toGame}>
-                <PlayArrow className={this.props.classes.svgIcon} />
                 PLAY!
                 </Button>
             </div>

@@ -108,11 +108,11 @@ class Nav extends React.Component {
             indicatorColor="primary"
             textColor="primary"
           >
-            {/* <Tab label="Toss Like A Boss" /> */}
+            {/* <Tab label="Know What to Throw" /> */}
             <img src={mainlogo} style={{width: 149, height: 100}}/>
             {/* /Users/maxmaher/Documents/prime/tier3/GROUP-PROJECT/waste-wise-game/src/components/Nav/NavGuest.js */}
             /Users/maxmaher/Documents/prime/tier3/GROUP-PROJECT/waste-wise-game/src/img/mainlogo.png
-            {/* <span>Toss Like A Boss</span> */}
+            {/* <span>Know What to Throw</span> */}
             {!this.props.user.id && (
               <Tab
                 label="PLAY"

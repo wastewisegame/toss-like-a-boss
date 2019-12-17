@@ -22,6 +22,7 @@ import SettingsOrganization from "../SettingsOrganization/SettingsOrganization";
 import SettingsAdmin from "../SettingsAdmin/SettingsAdmin";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import AdminGameData from "../AdminGameData/AdminGameData";
+import ResourceCredits from '../Resources/ResourceCredits';
 
 //Styling
 import { ThemeProvider } from "@material-ui/styles";
@@ -66,6 +67,7 @@ class App extends Component {
                     <Route exact path="/howtoplay" component={HowToPlay} />
                     <Route exact path="/resources" component={Resources} />
                     <Route exact path="/register" component={RegisterPage} />
+                    <Route exact path='/resourcecredits' component={ResourceCredits} />
                     <ProtectedRoute exact path="/settingsorg" component={SettingsOrganization} />
                     <AdminRoute exact path="/settingsadmin" component={SettingsAdmin} />
                     <ProtectedRoute exact path="/leaderboard" component={Leaderboard} />

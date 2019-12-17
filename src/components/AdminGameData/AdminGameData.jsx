@@ -10,8 +10,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-import MUIDataTable from "mui-datatables";
-
 class AdminGameData extends Component {
     componentDidMount() {
         this.props.dispatch({
@@ -62,15 +60,6 @@ class AdminGameData extends Component {
                         </TableHead>
                         <TableBody>
                             {gameStatsArray}
-                            {/* <TableRow>
-                                <TableCell>1</TableCell>
-                                <TableCell>Test Name</TableCell>
-                                <TableCell>Receptacle</TableCell>
-                                <TableCell>5</TableCell>
-                                <TableCell>5</TableCell>
-                                <TableCell>10</TableCell>
-                                <TableCell>50%</TableCell>
-                            </TableRow> */}
                         </TableBody>
                     </Table>
                 </Paper>
