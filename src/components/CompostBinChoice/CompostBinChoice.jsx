@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   compostDiv: {
-    backgroundColor: "grey",
+    // backgroundColor: "grey",
     borderRadius: "25px",
     width: 300
   },
@@ -18,15 +18,19 @@ const styles = {
     justifyContent: 'center'
   },
   choiceText: {
-    textAlign: 'center'
+    textAlign: 'center',
+    width: 'auto'
   },
   compostButtons: {
     display: 'flex',
     margin: 'auto',
-    width: 100
+    width: 'auto',
+    padding: 10
   },
   button: {
-    padding: 10
+    padding: 10,
+    width: 300,
+    margin: 10
   }
 }
 
@@ -41,23 +45,23 @@ class CompostBinChoice extends Component {
     return (
       <div className={this.props.classes.compostDivHolderDiv}>
         <div className={this.props.classes.compostDiv}>
-          <Typography className={this.props.classes.choiceText} variant='h6'>
+          {/* <Typography className={this.props.classes.choiceText} variant='h6'>
             Do you have a compost bin? Please select yes or no:
-            </Typography>
+            </Typography> */}
             <div className={this.props.classes.compostButtons}>
           <Button
           className={this.props.classes.button}
             color='primary'
             variant='contained'
             onClick={() => this.props.history.push("/game")}>
-            Yes
+            I have Trash, Recycling, and Composting
             </Button>
           <Button
               className={this.props.classes.button}
             color='primary'
             variant='contained'
             onClick={this.noCompostClick}>
-            No
+            I only have Trash and Recycling
             </Button>
           </div>
         </div>

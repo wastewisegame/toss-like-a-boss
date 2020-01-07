@@ -3,6 +3,11 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 
 const theme = createMuiTheme({
+  typeography: {
+    fontFamily:
+    '-apple-system,system-ui,BlinkMacSystemFont,' +
+      '"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',
+  },
   overrides: {
     MuiFormLabel: {
       root: {

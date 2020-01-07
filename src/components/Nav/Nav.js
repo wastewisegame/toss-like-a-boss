@@ -12,7 +12,7 @@ import "./Nav.css";
 import { withStyles } from "@material-ui/styles";
 
 // Icons and Logos for the App. Found on the Nav Bar. 
-import mainlogo from "../../img/mainlogo.png";
+import mainlogo from "../../img/WasteWiselogo.jpg"
 import Icon from "@mdi/react";
 import { mdiDoorOpen } from "@mdi/js";
 import { mdiGamepadSquare } from "@mdi/js";
@@ -109,9 +109,9 @@ class Nav extends React.Component {
             textColor="primary"
           >
             {/* <Tab label="Know What to Throw" /> */}
-            <img src={mainlogo} style={{width: 149, height: 100}}/>
+            <img src={mainlogo} style={{width: 150, height: 100}}/>
             {/* /Users/maxmaher/Documents/prime/tier3/GROUP-PROJECT/waste-wise-game/src/components/Nav/NavGuest.js */}
-            /Users/maxmaher/Documents/prime/tier3/GROUP-PROJECT/waste-wise-game/src/img/mainlogo.png
+            {/* /Users/maxmaher/Documents/prime/tier3/GROUP-PROJECT/waste-wise-game/src/img/WasteWiselogo.png */}
             {/* <span>Know What to Throw</span> */}
             {!this.props.user.id && (
               <Tab
