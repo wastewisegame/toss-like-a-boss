@@ -12,7 +12,7 @@ import "./Nav.css";
 import { withStyles } from "@material-ui/styles";
 
 // Icons and Logos for the App. Found on the Nav Bar. 
-import mainlogo from "../../img/mainlogo.png";
+import mainlogo from "../../img/WasteWiselogo.jpg"
 import Icon from "@mdi/react";
 import { mdiDoorOpen } from "@mdi/js";
 import { mdiGamepadSquare } from "@mdi/js";
@@ -20,6 +20,7 @@ import { mdiSettingsBox } from "@mdi/js";
 import { mdiHelpCircle } from "@mdi/js";
 import { mdiAccountPlus } from "@mdi/js";
 import { mdiDoorClosedLock } from "@mdi/js";
+import { mdiTableLarge } from '@mdi/js';
 
 
 function TabContainer(props) {
@@ -107,11 +108,11 @@ class Nav extends React.Component {
             indicatorColor="primary"
             textColor="primary"
           >
-            {/* <Tab label="Toss Like A Boss" /> */}
-            <img src={mainlogo} style={{width: 149, height: 100}}/>
+            {/* <Tab label="Know What to Throw" /> */}
+            <img src={mainlogo} style={{width: 150, height: 100}}/>
             {/* /Users/maxmaher/Documents/prime/tier3/GROUP-PROJECT/waste-wise-game/src/components/Nav/NavGuest.js */}
-            /Users/maxmaher/Documents/prime/tier3/GROUP-PROJECT/waste-wise-game/src/img/mainlogo.png
-            {/* <span>Toss Like A Boss</span> */}
+            {/* /Users/maxmaher/Documents/prime/tier3/GROUP-PROJECT/waste-wise-game/src/img/WasteWiselogo.png */}
+            {/* <span>Know What to Throw</span> */}
             {!this.props.user.id && (
               <Tab
                 label="PLAY"
@@ -139,6 +140,23 @@ class Nav extends React.Component {
                   <Icon
                     path={mdiSettingsBox}
                     title="Settings"
+                    size={2}
+                    horizontal
+                    rotate={360}
+                    color="green"
+                  />
+                }
+              />
+            )}
+            {this.props.user.wastewise_admin && (
+              <Tab
+                label="Data"
+                component={Link}
+                to="/admingamedata"
+                icon={
+                  <Icon
+                    path={mdiTableLarge}
+                    title="Data"
                     size={2}
                     horizontal
                     rotate={360}
@@ -241,12 +259,6 @@ Nav.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-
-// // Instead of taking everything from state, we just want the user
-// // object to determine if they are logged in
-// // if they are logged in, we show them a few more links
-// // if you wanted you could write this code like this:
-// // const mapStateToProps = ({ user }) => ({ user });
 const mapStateToProps = state => ({
   state,
   user: state.user

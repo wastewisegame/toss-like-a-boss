@@ -4,65 +4,66 @@ import axios from "axios";
 function* fetchItems(action) {
     try {
         let response = yield axios.get('/api/item/admin')
-        console.log('Saga response:', response.data)
         yield put({
             type: 'SET_ITEMS',
             payload: response.data
         })
     } catch (err) {
-        console.log('error in ITEM GET', err);
+    }
+}
+
+function* fetchGameStatistics(action) {
+    try {
+        let response = yield axios.get('/api/item/statistics')
+        yield put({
+            type: 'SET_GAME_STATISTICS',
+            payload: response.data
+        })
+    } catch (error) {
     }
 }
 
 function* addItem(action) {
     try {
         let response = yield axios.post('/api/item/admin', action.payload)
-        console.log('Add item saga response:', action.payload);
         yield put({
             type: 'FETCH_ITEMS',
             payload: response.data
         })
     } catch (err) {
-        console.log('error in ADD ITEM POST', err);
     }
 }
 
 function* deleteItem(action) {
     try {
         let response = yield axios.delete(`/api/item/admin/${action.payload}`)
-        console.log('Delete item saga response:', action.payload);
         yield put({
             type: 'FETCH_ITEMS',
             payload: response.data
         })
     } catch (err) {
-        console.log('error in ITEM DELETE', err);
     }
 }
 
 function* uploadImage(action) {
     try {
         let response = yield axios.post('/api/item/admin/upload', action.payload)
-        console.log('Upload item saga response:', action.payload);
         yield put({
             type: 'FETCH_ITEMS',
             payload: response.data
         })
     } catch (err) {
-        console.log('error in UPLOAD ITEM POST', err);
     }
 }
 
 function* updateItem(action) {
     try {
         let response = yield axios.put('/api/item/admin', action.payload);
-        console.log('Item update saga response:', action.payload);
         yield put({
             type: 'FETCH_ITEMS',
             payload: response.data
         })
     } catch (err) {
-        console.log('error in ITEM INFO PUT', err);
     }
 }
 
@@ -80,7 +81,6 @@ function* addItemImage(action) {
             const returnData = awsSignedResponse.data.data.returnData;
             const signedRequest = returnData.signedRequest;
             const url = returnData.url;
-            console.log('the image url happens to be:', url)
             action.payload.attachment_url = url;
             yield axios.put(signedRequest, action.payload.file, {
                 headers: {
@@ -96,7 +96,6 @@ function* addItemImage(action) {
             // })
         }
     } catch (error) {
-        console.log(error);
     }
 }
 
@@ -107,6 +106,7 @@ function* itemSaga() {
     yield takeEvery('UPLOAD_IMAGE', uploadImage);
     yield takeEvery('UPDATE_ITEM', updateItem);
     yield takeEvery('ADD_ITEM_IMAGE', addItemImage);
+    yield takeEvery('FETCH_GAME_STATISTICS', fetchGameStatistics);
 }
 
 export default itemSaga;

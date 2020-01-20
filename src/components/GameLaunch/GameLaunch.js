@@ -165,7 +165,6 @@ class GameLaunch extends Component {
   }
 
   componentWillUnmount() {
-    console.log('UMOUNTED, TEAM NAME IS', this.state.teamName)
     this.props.dispatch({
       type: 'FETCH_TEAM_ID_NUMBER',
       payload: {
@@ -177,12 +176,10 @@ class GameLaunch extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.currentContest !== prevProps.currentContest) {
-      console.log('there has been a change in props!')
     }
   }
 
   getContestInfo(contestId) {
-    console.log('currently the contest id is', contestId)
     this.props.dispatch({
       type: "FETCH_CURRENT_CONTEST_INFO",
       payload: contestId
@@ -212,7 +209,6 @@ toGame = () => {
   this.setState({
     timeToPlay: true
   });
-  console.log(this.state);
 };
 
 handleSubmit = event => {
@@ -263,7 +259,6 @@ handleLeaderboardClick = () => {
   }
 
 render() {
-  console.log(this.state);
 
   let teamNameArray = this.props.teamNames.map(name => {
     return <MenuItem value={name.team_name}>{name.team_name}</MenuItem>;
@@ -294,7 +289,7 @@ render() {
     <div className={this.props.classes.mainDiv}>
       <Typography classes={this.props.classes.nameHeader} component="div">
         <Box fontFamily='chunk' fontSize="h1.fontSize" textAlign="center">
-          TOSS LIKE A BOSS
+          KNOW WHAT TO THROW
                   </Box>
       </Typography>
       <div>
@@ -303,7 +298,6 @@ render() {
             <Button
               className={this.props.classes.HowToPlayButton}
               onClick={this.howToPlay}>
-              <Help />
               How To Play
                 </Button>
           </div>
@@ -318,7 +312,7 @@ render() {
             <div>
               <Typography component="div" gutterBottom>
                 <Box fontSize="h5.fontSize" textAlign="center">
-                  Welcome to TOSS LIKE A BOSS, the drag and drop game that tests your recycling skills
+                  Welcome to KNOW WHAT TO THROW, the game that tests your recycling skills
                   </Box>
               </Typography>
             </div>
@@ -349,7 +343,6 @@ render() {
               <Button
                 className={this.props.classes.PlayButton}
                 onClick={this.toGame}>
-                <PlayArrow className={this.props.classes.svgIcon} />
                 PLAY!
                 </Button>
             </div>

@@ -99,7 +99,7 @@ class LoginPage extends Component {
                       </h2>
                     )}
                     <form onSubmit={this.login}>
-                      <h1 className={classes.h1}>Toss Like a Boss</h1>
+                      <h1 className={classes.h1}>Know What to Throw</h1>
                       <div>
                         <TextField
                           align="left"

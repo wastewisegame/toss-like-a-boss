@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import wasteWiseLogo from "../../img/WasteWiselogo.jpg";
 
 //Material UI
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/paper";
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
 
 const styles = {
   link: {
@@ -39,75 +43,54 @@ const styles = {
     height: "10%",
     fontSize: "1.3em",
     opacity: "1",
+    marginTop: "50px",
     marginBottom: "50px",
     "&:hover": {
       backgroundColor: "darkgreen",
       color: "white"
+    },
+    resourcesButton: {
+      padding: "4px"
     }
   }
 };
 
 class Resources extends Component {
-
-goToWasteWise = () => {
-  window.open("https://www.mnchamber.com/your-opportunity/waste-wise", "_blank");
-}
+  goToWasteWise = () => {
+    window.open(
+      "https://www.mnchamber.com/your-opportunity/waste-wise",
+      "_blank"
+    );
+  };
 
   render() {
     return (
-      <div className={this.props.classes.mainDiv}>
+      <Paper className={this.props.classes.mainDiv}>
         <Grid container justify={"center"}>
-          <p className={this.props.classes.a}> Want to learn more? </p>
-        </Grid>
-        <Grid container justify={"center"}>
-          <p className={this.props.classes.p}>
-            Check out this link below for more information on Minnesota Waste Wise!
+          <p className={this.props.classes.a}>
+            {" "}
+            Want to learn more? Visit the MN Waste Wise website
           </p>
         </Grid>
         <Grid container justify={"center"}>
-          <Button
-            className={this.props.classes.Button}
-            onClick={this.goToWasteWise}>
-            Go to WasteWise MN Website
-          </Button>
+          <a href="https://www.mnchamber.com/your-opportunity/waste-wise" target="_blank">
+          <img
+            src={wasteWiseLogo}
+            alt="Waste Wise logo"
+            height="525px"
+            width="500px"
+          />
+          </a>
         </Grid>
-        <h4>Credit for game icons</h4>
-        <div>
-          Icons made by{" "}
-          <a
-            href='https://www.flaticon.com/authors/smashicons'
-            title='Smashicons'>
-            Smashicons
-          </a>{" "}
-          from{" "}
-          <a href='https://www.flaticon.com/' title='Flaticon'>
-            www.flaticon.com
-          </a>
-        </div>
-
-        <div>
-          Icons made by{" "}
-          <a href='https://www.flaticon.com/authors/monkik' title='monkik'>
-            monkik
-          </a>{" "}
-          from{" "}
-          <a href='https://www.flaticon.com/' title='Flaticon'>
-            www.flaticon.com
-          </a>
-        </div>
-        <div>
-          Icons made by{" "}
-          <a
-            href='https://www.flaticon.com/authors/payungkead'
-            title='Payungkead'>
-            Payungkead
-          </a>{" "}
-          from{" "}
-          <a href='https://www.flaticon.com/' title='Flaticon'>
-            www.flaticon.com
-          </a>
-        </div>
-      </div>
+        <Button
+          className={this.props.classes.Button}
+          variant="contained"
+          color="primary"
+          onClick={() => this.props.history.push("/resourcecredits")}
+        >
+          Credits
+        </Button>
+      </Paper>
     );
   }
 }

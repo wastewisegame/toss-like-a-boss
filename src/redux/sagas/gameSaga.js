@@ -10,7 +10,6 @@ function* addWrongAnswer(action) {
       payload: action.payload
     });
   } catch (error) {
-    console.log("error with add wrong answer saga", error);
   }
 }
 
@@ -22,12 +21,10 @@ function* fetchGameItems(action) {
       payload: response.data
     });
   } catch (error) {
-    console.log("error with fetch game items", error);
   }
 }
 
 function* firstTryCorrect(action) {
-  console.log('first try correct action.payload is', action.payload.id)
   try {
     yield axios.put(`/api/item/correct`, action.payload);
     yield put({
@@ -37,7 +34,6 @@ function* firstTryCorrect(action) {
       type: "UPDATE_GAME_SCORE"
     });
   } catch (error) {
-    console.log("error with firstTryCorrect saga", error);
   }
 }
 
@@ -45,13 +41,11 @@ function* firstTryIncorrect(action) {
   try {
     yield axios.put(`/api/item/incorrect`, action.payload);
   } catch (error) {
-    console.log("error with firstTryIncorrect saga", error);
   }
 }
 
 function* getContestCompostBoolean(action) {
   try {
-    console.log('id of current game is', action.payload)
     let id = action.payload
     const response = yield axios.get(`/api/contest/compost/${id}`)
     yield put ({
@@ -59,7 +53,6 @@ function* getContestCompostBoolean(action) {
       payload: response.data
     })
   } catch (error) {
-    console.log('error with getContestCompostBoolean saga', error)
   }
 }
 
@@ -67,27 +60,22 @@ function* getTeamNames(action) {
   try {
     let id = action.payload
     const response = yield axios.get(`/api/team/names/${id}`)
-    console.log('the get team names response', response.data)
     yield put ({
       type: 'SET_TEAM_NAMES',
       payload: response.data
     })
   } catch (error) {
-    console.log('error with get team names saga', error)
   }
 }
 
 function* fetchCurrentContestInfo(action) {
   try {
-    console.log('the action.payload for current contest is', action.payload)
     let response = yield axios.get(`/api/contest/currentcontest/${action.payload}`)
-    console.log('Current contest saga response:', response.data)
     yield put({
       type: 'SET_CURRENT_CONTEST_INFO',
       payload: response.data[0]
     })
   } catch (err) {
-    console.log('error in CURRENT CONTEST GET', err);
   }
 }
 
