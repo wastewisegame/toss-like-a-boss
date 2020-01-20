@@ -31,7 +31,7 @@ const GarbageBin = ({ canDrop, isOver, connectDropTarget }) => {
   }
   return (
     <div ref={connectDropTarget} style={{ ...style, backgroundColor }}>
-        <h2>Garbage</h2>
+        <h2>Trash</h2>
         <GarbageSvg />
     </div>
   );

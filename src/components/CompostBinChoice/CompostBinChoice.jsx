@@ -30,7 +30,9 @@ const styles = {
   button: {
     padding: 10,
     width: 300,
-    margin: 10
+    margin: 10,
+    borderRadius: 25,
+    border: "2px solid black"
   }
 }
 
