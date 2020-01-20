@@ -15,7 +15,7 @@ const style = {
   lineHeight: "normal",
   float: "left",
   borderRadius: "20px",
-  fontFamily: "truckin"
+  // fontFamily: "truckin"
 };
 //sets attributes so compost div is draggable
 const CompostBin = ({ canDrop, isOver, connectDropTarget }) => {
