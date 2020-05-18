@@ -20,7 +20,7 @@ const middlewareList = (process.env.NODE_ENV === 'development') ?
   [sagaMiddleware, logger] :
   [sagaMiddleware];
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = (process.env.NODE_ENV === 'development') ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 const store = createStore(
   // tells the saga middleware to use the rootReducer
   // rootSaga contains all of our other reducers
