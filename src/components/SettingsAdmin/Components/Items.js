@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { Backdrop, Card, CardActions, CardContent, Fab, Grid, MenuItem, Modal, TextField } from "@material-ui/core";
 import { Add, Edit, Cancel, Save, Delete, Remove } from '@material-ui/icons';
+import DoneIcon from '@material-ui/icons/Done';
 import { withStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
@@ -91,7 +92,7 @@ const styles = theme => ({
         marginLeft: 10
     },
     pleaseWait: {
-        color: "red",
+        color: "green",
         fontWeight: "bold"
     },
     modal: {
@@ -136,7 +137,8 @@ class Items extends Component {
         selectedFile: null,
         attachment_url: '',
         file: null,
-        pleaseWait: false
+        pleaseWait: false,
+        uploadSuccess: false,
     }
 
     //Load items to the DOM
@@ -199,7 +201,8 @@ class Items extends Component {
             receptacle: '',
             url: '',
             itemText: '',
-            file: ''
+            file: '',
+            uploadSuccess: false,
         })
     }
 
@@ -268,12 +271,15 @@ class Items extends Component {
         })
     };
 
+    // validateItemToSave = () => {
+
+    // }
+
     /**
      * Cloudinary unsigned upload 
-     */
-    /**
-     * instantiate our widget prior to DOM load for faster perceived modal open.
-     */
+     **/
+
+    //instantiate our widget prior to DOM load for faster perceived modal open.
     cloudinaryWidget = window.cloudinary.createUploadWidget(
             {  
                 cloudName: 'wwgamesortcdn',
@@ -299,6 +305,7 @@ class Items extends Component {
         if(response && response.event === 'success' ){
             console.log('succesful upload');
             this.setState({url: response.info.secure_url});
+            this.setState({ uploadSuccess: true });
         }else{
             return;
         }
@@ -444,41 +451,15 @@ class Items extends Component {
                         }}
                     />
                     <br/><br/>
-                    {/* <TextField
-                        type='file'
-                        onChange={this.handleUploadInputChange}
-                        /> */}
-                    <Button className={classes.upload} variant='contained' color='secondary' onClick={this.handleCloudinaryButton}>
+                    
+                    {!this.state.uploadSuccess && <Button className={classes.upload} variant='contained' color='secondary' onClick={this.handleCloudinaryButton}>
                         Upload Image
-					</Button>
-                    {/* {this.state.pleaseWait && <br/>}
-                    {this.state.pleaseWait && <span className={classes.pleaseWait}>Please wait...</span>} */}
+					</Button>}
+                    
+                    {this.state.uploadSuccess && <span className={classes.pleaseWait}> Uploaded successfully. Ready to be saved. </span>}
                     <br/><br/>
-                    {/* <TextField
-                        align="left"
-                        id="outlined-name-url"
-                        label="image url"
-                        className={classes.fieldLarge}
-                        value={this.state.url}
-                        margin="normal"
-                        variant="outlined"
-                        disabled="true"
-                        InputProps={{
-                            className: classes.input,
-                            classes: {
-                                root: classes.cssOutlinedInput,
-                                focused: classes.cssFocused,
-                                notchedOutline: classes.notchedOutline,
-                            }
-                        }}
-                        InputLabelProps={{
-                            className: classes.input,
-                            shrink: true
-                        }}
-                    />
-                    <br /><br /> */}
-                    <Button className={classes.button} onClick={() => this.handleItemAdd()}
-                        variant="contained" name="items" color="primary">Add Item</Button>
+                    {this.state.uploadSuccess &&  <Button className={classes.button}  onClick={() => this.handleItemAdd()}
+                        variant="contained" name="items" color="primary">Save New Item</Button> }
                 </div>}
 
                 <br /><br />
