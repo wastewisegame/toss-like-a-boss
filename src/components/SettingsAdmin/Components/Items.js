@@ -268,6 +268,52 @@ class Items extends Component {
         })
     };
 
+    /**
+     * Cloudinary unsigned upload 
+     */
+    /**
+     * instantiate our widget prior to DOM load for faster perceived modal open.
+     */
+    cloudinaryWidget = window.cloudinary.createUploadWidget(
+            {  
+                cloudName: 'wwgamesortcdn',
+                uploadPreset: 'uht8mht3',
+                sources: ['local'],
+                multiple: false,
+                defaultSource: 'local',
+                resourceType: 'image',
+                singleUploadAutoClose: false,
+                showUploadMoreButton: false,
+            }, (error,response) => {
+                if(error){
+                    console.log(error);
+                }else{
+                    this.cloudinaryCallback(response);
+                }
+        })
+    /**
+     * callback handler for Cloudinary Widget API
+     * https://cloudinary.com/documentation/upload_widget
+     */
+    cloudinaryCallback = (response) => {
+        if(response && response.event === 'success' ){
+            console.log('succesful upload');
+            this.setState({url: response.info.secure_url});
+        }else{
+            return;
+        }
+    }
+
+    handleCloudinaryButton = () => {
+        console.log("widget?", this.cloudinaryWidget)
+        if(!this.cloudinaryWidget.isShowing()){
+            this.cloudinaryWidget.open();
+        }else{
+            return;
+        }
+    }
+
+
     render() {
 
         //Allows for classes when using Material-UI styling.
@@ -316,7 +362,7 @@ class Items extends Component {
                 {this.state.toggleAdd && <div>
                     <TextField
                         align="left"
-                        id="outlined-name"
+                        id="outlined-name-item-name"
                         label="item name"
                         className={classes.fieldMedium}
                         value={this.state.itemName}
@@ -338,7 +384,7 @@ class Items extends Component {
                     />
                     <TextField
                         align="left"
-                        id="outlined-name"
+                        id="outlined-name-receptacle"
                         select
                         label="receptacle"
                         className={classes.fieldMedium}
@@ -377,7 +423,7 @@ class Items extends Component {
                     <br />
                     <TextField
                         align="left"
-                        id="outlined-name"
+                        id="outlined-name-reason-for-receptacle"
                         label="reason for receptacle"
                         className={classes.fieldLarge}
                         value={this.state.itemText}
@@ -398,25 +444,25 @@ class Items extends Component {
                         }}
                     />
                     <br/><br/>
-                    <TextField
+                    {/* <TextField
                         type='file'
                         onChange={this.handleUploadInputChange}
-                        />
-                    <Button className={classes.upload} variant='contained' color='secondary' onClick={this.handleUpload}>
-                        Upload
+                        /> */}
+                    <Button className={classes.upload} variant='contained' color='secondary' onClick={this.handleCloudinaryButton}>
+                        Upload Image
 					</Button>
-                    {this.state.pleaseWait && <br/>}
-                    {this.state.pleaseWait && <span className={classes.pleaseWait}>Please wait...</span>}
+                    {/* {this.state.pleaseWait && <br/>}
+                    {this.state.pleaseWait && <span className={classes.pleaseWait}>Please wait...</span>} */}
                     <br/><br/>
                     <TextField
                         align="left"
-                        id="outlined-name"
+                        id="outlined-name-url"
                         label="image url"
                         className={classes.fieldLarge}
                         value={this.state.url}
-                        onChange={this.handleChangeFor('url')}
                         margin="normal"
                         variant="outlined"
+                        disable="true"
                         InputProps={{
                             className: classes.input,
                             classes: {
@@ -496,7 +542,7 @@ class Items extends Component {
                             <div>
                                 <TextField
                                     align="left"
-                                    id="outlined-name"
+                                    id="outlined-name-item-name"
                                     label="item name"
                                     className={classes.fieldMedium}
                                     value={this.state.itemName}
@@ -518,7 +564,7 @@ class Items extends Component {
                                 />
                                 <TextField
                                     align="left"
-                                    id="outlined-name"
+                                    id="outlined-name-receptacle-1"
                                     select
                                     label="receptacle"
                                     className={classes.fieldMedium}
@@ -558,7 +604,7 @@ class Items extends Component {
                             <div>
                                 <TextField
                                     align="left"
-                                    id="outlined-name"
+                                    id="outlined-name-reason-for-receptacle-2"
                                     label="reason for receptacle"
                                     className={classes.fieldLarge}
                                     value={this.state.itemText}
