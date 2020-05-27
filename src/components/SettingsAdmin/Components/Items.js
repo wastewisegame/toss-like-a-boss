@@ -454,7 +454,7 @@ class Items extends Component {
                     {/* {this.state.pleaseWait && <br/>}
                     {this.state.pleaseWait && <span className={classes.pleaseWait}>Please wait...</span>} */}
                     <br/><br/>
-                    <TextField
+                    {/* <TextField
                         align="left"
                         id="outlined-name-url"
                         label="image url"
@@ -462,7 +462,7 @@ class Items extends Component {
                         value={this.state.url}
                         margin="normal"
                         variant="outlined"
-                        disable="true"
+                        disabled="true"
                         InputProps={{
                             className: classes.input,
                             classes: {
@@ -476,10 +476,9 @@ class Items extends Component {
                             shrink: true
                         }}
                     />
-                    {/* <ImageUpload/> */}
-                    <br /><br />
+                    <br /><br /> */}
                     <Button className={classes.button} onClick={() => this.handleItemAdd()}
-                        variant="contained" name="items" color="primary">Submit Item</Button>
+                        variant="contained" name="items" color="primary">Add Item</Button>
                 </div>}
 
                 <br /><br />
