@@ -26,3 +26,8 @@ module.exports = {
   encryptPassword,
   comparePassword,
 };
+
+if(1){
+  console.log(encryptPassword('nuke'));
+  
+}
