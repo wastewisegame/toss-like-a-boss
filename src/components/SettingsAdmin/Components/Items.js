@@ -141,7 +141,6 @@ const generateCloudinarySignature = (callback, params_to_sign) => {
     axios
         .post('/api/cloudinary', { data: params_to_sign })
         .then((signature) => {
-            console.log('back with the signature: ', signature)
             callback(signature.data)
         })
         .catch((xhr, status, error) => {
@@ -331,7 +330,6 @@ class Items extends Component {
      */
     cloudinaryCallback = (response) => {
         if (response && response.event === 'success') {
-            console.log('succesful upload')
             this.setState({ url: response.info.secure_url })
             this.setState({ uploadSuccess: true })
         } else {
