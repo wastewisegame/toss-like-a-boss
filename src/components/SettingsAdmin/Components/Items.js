@@ -1,19 +1,30 @@
 //Imports (React, Material-UI, Redux, SweetAlert)
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import { Backdrop, Card, CardActions, CardContent, Fab, Grid, MenuItem, Modal, TextField } from "@material-ui/core";
-import { Add, Edit, Cancel, Save, Delete, Remove } from '@material-ui/icons';
-import DoneIcon from '@material-ui/icons/Done';
-import { withStyles } from '@material-ui/styles';
-import { connect } from 'react-redux';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import React, { Component } from 'react'
+import Button from '@material-ui/core/Button'
+import axios from 'axios'
+import {
+    Backdrop,
+    Card,
+    CardActions,
+    CardContent,
+    Fab,
+    Grid,
+    MenuItem,
+    Modal,
+    TextField,
+} from '@material-ui/core'
+import { Add, Edit, Cancel, Save, Delete, Remove } from '@material-ui/icons'
+import DoneIcon from '@material-ui/icons/Done'
+import { withStyles } from '@material-ui/styles'
+import { connect } from 'react-redux'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 //Declaring SweetAlert for use later in this file
 const MySwal = withReactContent(Swal)
 
 //Styles for Material-UI Components
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         flexGrow: 1,
     },
@@ -29,29 +40,29 @@ const styles = theme => ({
         fontWeight: 'bold',
     },
     cardContent: {
-        fontSize: 14
+        fontSize: 14,
     },
     cardContentLeft: {
         fontSize: 20,
-        width: 10
+        width: 10,
     },
     cardContentIcons: {
         fontSize: 20,
         paddingLeft: 5,
-        paddingRight: 5
+        paddingRight: 5,
     },
     cardContentItems: {
         fontSize: 20,
         paddingLeft: 8,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     image: {
         height: 100,
-        width: 100
+        width: 100,
     },
     imageModal: {
-        height: "20%",
-        width: "20%",
+        height: '20%',
+        width: '20%',
     },
     icon: {
         width: 35,
@@ -63,37 +74,37 @@ const styles = theme => ({
         margin: 5,
         width: 240,
         '&:hover:not($disabled):not($cssFocused):not($error) $notchedOutline': {
-            borderColor: "black"
-        }
+            borderColor: 'black',
+        },
     },
     fieldLarge: {
         margin: 5,
         width: 490,
         '&:hover:not($disabled):not($cssFocused):not($error) $notchedOutline': {
-            borderColor: "black"
-        }
+            borderColor: 'black',
+        },
     },
     addItem: {
         fontSize: 24,
     },
     edit: {
-        width: "10%"
+        width: '10%',
     },
     delete: {
-        width: "10%"
+        width: '10%',
     },
     itemName: {
-        width: "40%"
+        width: '40%',
     },
     receptacle: {
-        width: "20%"
+        width: '20%',
     },
     upload: {
-        marginLeft: 10
+        marginLeft: 10,
     },
     pleaseWait: {
-        color: "green",
-        fontWeight: "bold"
+        color: 'green',
+        fontWeight: 'bold',
     },
     modal: {
         display: 'flex',
@@ -106,27 +117,26 @@ const styles = theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
         color: theme.palette.secondary.main,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     input: {
-        color: "black"
+        color: 'black',
     },
     cssLabel: {
         '&$cssFocused': {
-            color: "black",
+            color: 'black',
         },
     },
     cssOutlinedInput: {
         '&$cssFocused $notchedOutline': {
-            borderColor: "black",
+            borderColor: 'black',
         },
     },
     cssFocused: {},
-    notchedOutline: { borderColor: "black" }
-});
+    notchedOutline: { borderColor: 'black' },
+})
 
 class Items extends Component {
-
     state = {
         toggleAdd: false,
         itemName: '',
@@ -143,7 +153,7 @@ class Items extends Component {
 
     //Load items to the DOM
     componentDidMount() {
-        this.getItems();
+        this.getItems()
     }
 
     //When an image is detected in props, load these images
@@ -151,7 +161,7 @@ class Items extends Component {
         if (this.props.image !== prevProps.image) {
             this.setState({
                 url: this.props.image,
-                pleaseWait: false
+                pleaseWait: false,
             })
         }
     }
@@ -159,22 +169,22 @@ class Items extends Component {
     //Function to get the items, included in componentDidMount
     getItems() {
         this.props.dispatch({
-            type: 'FETCH_ITEMS'
+            type: 'FETCH_ITEMS',
         })
     }
-    
+
     //Toggles display of form for a new item
     handleAddClick = () => {
         this.setState({
-            toggleAdd: !this.state.toggleAdd
+            toggleAdd: !this.state.toggleAdd,
         })
     }
 
     //Saves any changes to form fields to state as users make edits
     handleChangeFor = (propertyName) => (event) => {
         this.setState({
-            [propertyName]: event.target.value
-        });
+            [propertyName]: event.target.value,
+        })
     }
 
     //Initializes item fields with its saved values upon edit
@@ -185,16 +195,15 @@ class Items extends Component {
             receptacle: receptacle,
             itemText: text,
             url: url,
-            itemId: id
+            itemId: id,
         })
-    };
+    }
 
     //Posts a new item to the database
     handleItemAdd = () => {
         this.props.dispatch({
             type: 'ADD_ITEM',
-            payload: this.state
-
+            payload: this.state,
         })
         this.setState({
             itemName: '',
@@ -215,12 +224,12 @@ class Items extends Component {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete'
+            confirmButtonText: 'Delete',
         }).then((result) => {
             if (result.value) {
                 this.props.dispatch({
                     type: 'DELETE_ITEM',
-                    payload: id
+                    payload: id,
                 })
                 Swal.fire(
                     'Deleted!',
@@ -232,32 +241,32 @@ class Items extends Component {
     }
 
     //Grabs the image file information upon selecting an image file
-    handleUploadInputChange = e => {
-        this.setState({ file: e.target.files[0] });
-    };
+    handleUploadInputChange = (e) => {
+        this.setState({ file: e.target.files[0] })
+    }
 
     //Posts the image to Amazon Web Services S3 storage and retrieves the image URL.
-    handleUpload = event => {
-        event.preventDefault();
+    handleUpload = (event) => {
+        event.preventDefault()
 
-         this.props.dispatch({
+        this.props.dispatch({
             type: 'ADD_ITEM_IMAGE',
-            payload: this.state
-        });
+            payload: this.state,
+        })
 
         this.setState({
-            pleaseWait: !this.state.pleaseWait
+            pleaseWait: !this.state.pleaseWait,
         })
-    };
+    }
 
     //Handes PUT request to change then information about an item.
     handleEdit = (event) => {
-        event.preventDefault();
+        event.preventDefault()
         this.props.dispatch({
             type: 'UPDATE_ITEM',
-            payload: this.state
+            payload: this.state,
         })
-        this.handleItemClose();
+        this.handleItemClose()
     }
 
     //Allows a user to cancel an item change.
@@ -269,80 +278,112 @@ class Items extends Component {
             itemUrl: '',
             itemText: '',
         })
-    };
+    }
 
     // validateItemToSave = () => {
 
     // }
 
     /**
-     * Cloudinary unsigned upload 
+     * Cloudinary unsigned upload
      **/
 
     //instantiate our widget prior to DOM load for faster perceived modal open.
     cloudinaryWidget = window.cloudinary.createUploadWidget(
-            {  
-                cloudName: 'wwgamesortcdn',
-                uploadPreset: 'uht8mht3',
-                sources: ['local'],
-                multiple: false,
-                defaultSource: 'local',
-                resourceType: 'image',
-                singleUploadAutoClose: false,
-                showUploadMoreButton: false,
-            }, (error,response) => {
-                if(error){
-                    console.log(error);
-                }else{
-                    this.cloudinaryCallback(response);
-                }
-        })
+        {
+            cloudName: 'wwgamesortcdn',
+            uploadPreset: 'signed_preset_default',
+            uploadSignature: this.generateCloudinarySignature,
+            uploadSignatureTimestamp: Date.now(),
+            authenticated: true,
+            apiKey: '959762355421156',
+            sources: ['local'],
+            multiple: false,
+            defaultSource: 'local',
+            singleUploadAutoClose: false,
+            showUploadMoreButton: false,
+        },
+        (error, response) => {
+            if (error) {
+                console.log(error)
+            } else {
+                this.cloudinaryCallback(response)
+            }
+        }
+    )
     /**
      * callback handler for Cloudinary Widget API
      * https://cloudinary.com/documentation/upload_widget
      */
     cloudinaryCallback = (response) => {
-        if(response && response.event === 'success' ){
-            console.log('succesful upload');
-            this.setState({url: response.info.secure_url});
-            this.setState({ uploadSuccess: true });
-        }else{
-            return;
+        if (response && response.event === 'success') {
+            console.log('succesful upload')
+            this.setState({ url: response.info.secure_url })
+            this.setState({ uploadSuccess: true })
+        } else {
+            return
         }
     }
 
     handleCloudinaryButton = () => {
-        console.log("widget?", this.cloudinaryWidget)
-        if(!this.cloudinaryWidget.isShowing()){
-            this.cloudinaryWidget.open();
-        }else{
-            return;
+        console.log('widget?', this.cloudinaryWidget)
+        if (!this.cloudinaryWidget.isShowing()) {
+            this.cloudinaryWidget.open()
+        } else {
+            return
         }
     }
-
+    generateCloudinarySignature = (callback, params_to_sign) => {
+        console.log('calling generateCLoudSig')
+        axios
+            .post('/api/cloudinary', { data: params_to_sign })
+            .then((signature) => {
+                console.log('back with the signature: ', signature)
+                callback(signature)
+            })
+            .catch((xhr, status, error) => {
+                console.log(
+                    'xhr --> %s  status --> %s  error --> %s ',
+                    xhr,
+                    status,
+                    error
+                )
+            })
+    }
 
     render() {
-
         //Allows for classes when using Material-UI styling.
         const { classes } = this.props
 
         //Item list variable, containing a loop to display all items in the database to the DOM in a table format.
-        let itemList = this.props.item.map(item => {
+        let itemList = this.props.item.map((item) => {
             return (
                 <tr>
                     <td className={classes.cardContentIconsLeft}>
-                        <Button onClick={() => this.handleItemEditOpen(item.name, item.receptacle, item.item_text, item.url, item.id)}>
+                        <Button
+                            onClick={() =>
+                                this.handleItemEditOpen(
+                                    item.name,
+                                    item.receptacle,
+                                    item.item_text,
+                                    item.url,
+                                    item.id
+                                )
+                            }
+                        >
                             <Edit />
                         </Button>
                     </td>
                     <td className={classes.cardContentIcons}>
-                        <Button onClick={() => this.handleDelete(item.name, item.id)}>
+                        <Button
+                            onClick={() =>
+                                this.handleDelete(item.name, item.id)
+                            }
+                        >
                             <Delete />
                         </Button>
                     </td>
-                    <td className={classes.cardContentItems}>
-                        {item.name}
-                    </td>
+                    <td className={classes.cardContentItems}>{item.name}</td>
                     <td className={classes.cardContentItems}>
                         {item.receptacle}
                     </td>
@@ -354,149 +395,202 @@ class Items extends Component {
         })
 
         return (
-
             <div>
                 <span className={classes.addItem}>Add Item</span>
                 <br />
-                {!this.state.toggleAdd ? <Fab color="primary" aria-label="add" style={{ marginTop: 15 }} onClick={this.handleAddClick}>
-                    <Add />
-                </Fab> :
-                    <Fab color="secondary" aria-label="remove" style={{ marginTop: 15 }} onClick={this.handleAddClick}>
+                {!this.state.toggleAdd ? (
+                    <Fab
+                        color="primary"
+                        aria-label="add"
+                        style={{ marginTop: 15 }}
+                        onClick={this.handleAddClick}
+                    >
+                        <Add />
+                    </Fab>
+                ) : (
+                    <Fab
+                        color="secondary"
+                        aria-label="remove"
+                        style={{ marginTop: 15 }}
+                        onClick={this.handleAddClick}
+                    >
                         <Remove />
                     </Fab>
-                }
-                <br /><br />
-                {this.state.toggleAdd && <div>
-                    <TextField
-                        align="left"
-                        id="outlined-name-item-name"
-                        label="item name"
-                        className={classes.fieldMedium}
-                        value={this.state.itemName}
-                        onChange={this.handleChangeFor('itemName')}
-                        margin="normal"
-                        variant="outlined"
-                        InputProps={{
-                            className: classes.input,
-                            classes: {
-                                root: classes.cssOutlinedInput,
-                                focused: classes.cssFocused,
-                                notchedOutline: classes.notchedOutline,
-                            }
-                        }}
-                        InputLabelProps={{
-                            className: classes.input,
-                            shrink: true
-                        }}
-                    />
-                    <TextField
-                        align="left"
-                        id="outlined-name-receptacle"
-                        select
-                        label="receptacle"
-                        className={classes.fieldMedium}
-                        value={this.state.receptacle}
-                        onChange={this.handleChangeFor('receptacle')}
-                        SelectProps={{
-                            MenuProps: {
-                                className: classes.status,
-                            },
-                        }}
-                        margin="normal"
-                        variant="outlined"
-                        InputProps={{
-                            className: classes.input,
-                            classes: {
-                                root: classes.cssOutlinedInput,
-                                focused: classes.cssFocused,
-                                notchedOutline: classes.notchedOutline,
-                            }
-                        }}
-                        InputLabelProps={{
-                            className: classes.input,
-                            shrink: true
-                        }}
-                    >
-                        <MenuItem value="garbage">
-                            Garbage
-                        </MenuItem>
-                        <MenuItem value="recycle">
-                            Recycling
-                        </MenuItem>
-                        <MenuItem value="compost">
-                            Compost
-                        </MenuItem>
-                    </TextField>
-                    <br />
-                    <TextField
-                        align="left"
-                        id="outlined-name-reason-for-receptacle"
-                        label="reason for receptacle"
-                        className={classes.fieldLarge}
-                        value={this.state.itemText}
-                        onChange={this.handleChangeFor('itemText')}
-                        margin="normal"
-                        variant="outlined"
-                        InputProps={{
-                            className: classes.input,
-                            classes: {
-                                root: classes.cssOutlinedInput,
-                                focused: classes.cssFocused,
-                                notchedOutline: classes.notchedOutline,
-                            }
-                        }}
-                        InputLabelProps={{
-                            className: classes.input,
-                            shrink: true
-                        }}
-                    />
-                    <br/><br/>
-                    
-                    {!this.state.uploadSuccess && <Button className={classes.upload} variant='contained' color='secondary' onClick={this.handleCloudinaryButton}>
-                        Upload Image
-					</Button>}
-                    
-                    {this.state.uploadSuccess && <span className={classes.pleaseWait}> Uploaded successfully. Ready to be saved. </span>}
-                    <br/><br/>
-                    {this.state.uploadSuccess &&  <Button className={classes.button}  onClick={() => this.handleItemAdd()}
-                        variant="contained" name="items" color="primary">Save New Item</Button> }
-                </div>}
+                )}
+                <br />
+                <br />
+                {this.state.toggleAdd && (
+                    <div>
+                        <TextField
+                            align="left"
+                            id="outlined-name-item-name"
+                            label="item name"
+                            className={classes.fieldMedium}
+                            value={this.state.itemName}
+                            onChange={this.handleChangeFor('itemName')}
+                            margin="normal"
+                            variant="outlined"
+                            InputProps={{
+                                className: classes.input,
+                                classes: {
+                                    root: classes.cssOutlinedInput,
+                                    focused: classes.cssFocused,
+                                    notchedOutline: classes.notchedOutline,
+                                },
+                            }}
+                            InputLabelProps={{
+                                className: classes.input,
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            align="left"
+                            id="outlined-name-receptacle"
+                            select
+                            label="receptacle"
+                            className={classes.fieldMedium}
+                            value={this.state.receptacle}
+                            onChange={this.handleChangeFor('receptacle')}
+                            SelectProps={{
+                                MenuProps: {
+                                    className: classes.status,
+                                },
+                            }}
+                            margin="normal"
+                            variant="outlined"
+                            InputProps={{
+                                className: classes.input,
+                                classes: {
+                                    root: classes.cssOutlinedInput,
+                                    focused: classes.cssFocused,
+                                    notchedOutline: classes.notchedOutline,
+                                },
+                            }}
+                            InputLabelProps={{
+                                className: classes.input,
+                                shrink: true,
+                            }}
+                        >
+                            <MenuItem value="garbage">Garbage</MenuItem>
+                            <MenuItem value="recycle">Recycling</MenuItem>
+                            <MenuItem value="compost">Compost</MenuItem>
+                        </TextField>
+                        <br />
+                        <TextField
+                            align="left"
+                            id="outlined-name-reason-for-receptacle"
+                            label="reason for receptacle"
+                            className={classes.fieldLarge}
+                            value={this.state.itemText}
+                            onChange={this.handleChangeFor('itemText')}
+                            margin="normal"
+                            variant="outlined"
+                            InputProps={{
+                                className: classes.input,
+                                classes: {
+                                    root: classes.cssOutlinedInput,
+                                    focused: classes.cssFocused,
+                                    notchedOutline: classes.notchedOutline,
+                                },
+                            }}
+                            InputLabelProps={{
+                                className: classes.input,
+                                shrink: true,
+                            }}
+                        />
+                        <br />
+                        <br />
 
-                <br /><br />
+                        {!this.state.uploadSuccess && (
+                            <Button
+                                className={classes.upload}
+                                variant="contained"
+                                color="secondary"
+                                onClick={this.handleCloudinaryButton}
+                            >
+                                Upload Image
+                            </Button>
+                        )}
+
+                        {this.state.uploadSuccess && (
+                            <span className={classes.pleaseWait}>
+                                {' '}
+                                Uploaded successfully. Ready to be saved.{' '}
+                            </span>
+                        )}
+                        <br />
+                        <br />
+                        {this.state.uploadSuccess && (
+                            <Button
+                                className={classes.button}
+                                onClick={() => this.handleItemAdd()}
+                                variant="contained"
+                                name="items"
+                                color="primary"
+                            >
+                                Save New Item
+                            </Button>
+                        )}
+                    </div>
+                )}
+
+                <br />
+                <br />
                 <Grid container spacing={4} justify="center">
-                    <Grid item sm={2}>
-                    </Grid>
+                    <Grid item sm={2}></Grid>
                     <Grid item sm={8}>
                         <Card className={classes.card}>
-                            <CardActions style={{ backgroundColor: "#EEF1F1" }}>
-                                <Grid item sm={5}>
-                                </Grid>
+                            <CardActions style={{ backgroundColor: '#EEF1F1' }}>
+                                <Grid item sm={5}></Grid>
                                 <Grid item sm={2}>
-                                    <span className={classes.cardHeader} style={{ marginLeft: "auto" }}>Items</span>
+                                    <span
+                                        className={classes.cardHeader}
+                                        style={{ marginLeft: 'auto' }}
+                                    >
+                                        Items
+                                    </span>
                                 </Grid>
-                                <Grid item sm={5} style={{ textAlign: "right" }}>
-                                </Grid>
+                                <Grid
+                                    item
+                                    sm={5}
+                                    style={{ textAlign: 'right' }}
+                                ></Grid>
                             </CardActions>
-                            <CardContent style={{ backgroundColor: "#EEF1F1" }}>
-                                {this.props.item[0] && <table className={classes.tableItem}>
-                                    <thead>
-                                        <tr>
-                                            <th className={classes.edit}>Edit</th>
-                                            <th className={classes.delete}>Delete</th>
-                                            <th className={classes.itemName}>Item Name</th>
-                                            <th className={classes.receptacle}>Receptacle</th>
-                                            <th className={classes.image}>Image</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {itemList}
-                                    </tbody>
-                                </table>}
+                            <CardContent style={{ backgroundColor: '#EEF1F1' }}>
+                                {this.props.item[0] && (
+                                    <table className={classes.tableItem}>
+                                        <thead>
+                                            <tr>
+                                                <th className={classes.edit}>
+                                                    Edit
+                                                </th>
+                                                <th className={classes.delete}>
+                                                    Delete
+                                                </th>
+                                                <th
+                                                    className={classes.itemName}
+                                                >
+                                                    Item Name
+                                                </th>
+                                                <th
+                                                    className={
+                                                        classes.receptacle
+                                                    }
+                                                >
+                                                    Receptacle
+                                                </th>
+                                                <th className={classes.image}>
+                                                    Image
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>{itemList}</tbody>
+                                    </table>
+                                )}
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={2}>
-                    </Grid>
+                    <Grid item sm={2}></Grid>
                 </Grid>
 
                 <Modal
@@ -511,13 +605,19 @@ class Items extends Component {
                         timeout: 500,
                     }}
                 >
-                    <CardContent className={classes.form} style={{ backgroundColor: "#EEF1F1" }}>
-
+                    <CardContent
+                        className={classes.form}
+                        style={{ backgroundColor: '#EEF1F1' }}
+                    >
                         {/* <h1 className={classes.h1} style={{ color: this.props.user.color }}>Enter Contest Details</h1> */}
                         <form onSubmit={this.handleEdit}>
                             <div>
-                                <img className={classes.imageModal} src={this.state.url}/>
-                                <br/><br/>
+                                <img
+                                    className={classes.imageModal}
+                                    src={this.state.url}
+                                />
+                                <br />
+                                <br />
                             </div>
                             <div>
                                 <TextField
@@ -534,12 +634,13 @@ class Items extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 />
                                 <TextField
@@ -549,7 +650,9 @@ class Items extends Component {
                                     label="receptacle"
                                     className={classes.fieldMedium}
                                     value={this.state.receptacle}
-                                    onChange={this.handleChangeFor('receptacle')}
+                                    onChange={this.handleChangeFor(
+                                        'receptacle'
+                                    )}
                                     SelectProps={{
                                         MenuProps: {
                                             className: classes.status,
@@ -562,23 +665,20 @@ class Items extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 >
-                                    <MenuItem value="garbage">
-                                        Garbage
-                                    </MenuItem>
+                                    <MenuItem value="garbage">Garbage</MenuItem>
                                     <MenuItem value="recycle">
                                         Recycling
                                     </MenuItem>
-                                    <MenuItem value="compost">
-                                        Compost
-                                    </MenuItem>
+                                    <MenuItem value="compost">Compost</MenuItem>
                                 </TextField>
                             </div>
                             <div>
@@ -596,12 +696,13 @@ class Items extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 />
                             </div>
@@ -611,27 +712,28 @@ class Items extends Component {
                                     name="cancel"
                                     color="secondary"
                                     onClick={() => this.handleItemClose()}
-                                    style={{ marginTop: 10, marginRight: 10 }}>
-                                    <Cancel style={{ marginRight: 3 }} />Cancel
+                                    style={{ marginTop: 10, marginRight: 10 }}
+                                >
+                                    <Cancel style={{ marginRight: 3 }} />
+                                    Cancel
                                 </Button>
                                 <Button
                                     variant="contained"
                                     type="submit"
                                     name="submit"
                                     color="primary"
-                                    style={{ marginTop: 10 }}>
-                                    <Save style={{ marginRight: 3 }} />Save
-                         </Button>
+                                    style={{ marginTop: 10 }}
+                                >
+                                    <Save style={{ marginRight: 3 }} />
+                                    Save
+                                </Button>
                             </div>
                         </form>
-
                     </CardContent>
                 </Modal>
             </div>
         )
-
     }
-
 }
 
 const mapStateToProps = (reduxStore) => {
@@ -640,7 +742,7 @@ const mapStateToProps = (reduxStore) => {
         team: reduxStore.teamSettings,
         organization: reduxStore.orgSettings,
         item: reduxStore.item,
-        image: reduxStore.imageUrlReducer
+        image: reduxStore.imageUrlReducer,
     }
 }
-export default connect(mapStateToProps)(withStyles(styles)(Items));
+export default connect(mapStateToProps)(withStyles(styles)(Items))

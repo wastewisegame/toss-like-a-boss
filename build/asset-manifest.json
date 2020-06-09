@@ -1,33 +1,33 @@
 {
-  "files": {
-    "main.css": "/static/css/main.d979cc09.chunk.css",
-    "main.js": "/static/js/main.c757ab73.chunk.js",
-    "main.js.map": "/static/js/main.c757ab73.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.7e26b5fb.js",
-    "runtime-main.js.map": "/static/js/runtime-main.7e26b5fb.js.map",
-    "static/css/2.47271137.chunk.css": "/static/css/2.47271137.chunk.css",
-    "static/js/2.fff66e55.chunk.js": "/static/js/2.fff66e55.chunk.js",
-    "static/js/2.fff66e55.chunk.js.map": "/static/js/2.fff66e55.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.640db0ad3cb49637fdaa9fe3dd6bc522.js": "/precache-manifest.640db0ad3cb49637fdaa9fe3dd6bc522.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.47271137.chunk.css.map": "/static/css/2.47271137.chunk.css.map",
-    "static/css/main.d979cc09.chunk.css.map": "/static/css/main.d979cc09.chunk.css.map",
-    "static/js/2.fff66e55.chunk.js.LICENSE.txt": "/static/js/2.fff66e55.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/static/media/scoreboardfont.a8e5f453.ttf",
-    "static/media/WasteWiselogo.jpg": "/static/media/WasteWiselogo.e6689338.jpg",
-    "static/media/fifthHowToSlide.png": "/static/media/fifthHowToSlide.4eae8aab.png",
-    "static/media/firstHowToSlide.png": "/static/media/firstHowToSlide.78384fb0.png",
-    "static/media/fourthHowToSlide.png": "/static/media/fourthHowToSlide.d187aed8.png",
-    "static/media/index.css": "/static/media/roboto-latin-900italic.ebf6d164.woff2",
-    "static/media/secondHowToSlide.png": "/static/media/secondHowToSlide.0c080d91.png",
-    "static/media/thirdHowToSlide.png": "/static/media/thirdHowToSlide.e59638b2.png"
-  },
-  "entrypoints": [
-    "static/js/runtime-main.7e26b5fb.js",
-    "static/css/2.47271137.chunk.css",
-    "static/js/2.fff66e55.chunk.js",
-    "static/css/main.d979cc09.chunk.css",
-    "static/js/main.c757ab73.chunk.js"
-  ]
+    "files": {
+        "main.css": "/static/css/main.d979cc09.chunk.css",
+        "main.js": "/static/js/main.0fcbee64.chunk.js",
+        "main.js.map": "/static/js/main.0fcbee64.chunk.js.map",
+        "runtime-main.js": "/static/js/runtime-main.7e26b5fb.js",
+        "runtime-main.js.map": "/static/js/runtime-main.7e26b5fb.js.map",
+        "static/css/2.47271137.chunk.css": "/static/css/2.47271137.chunk.css",
+        "static/js/2.c8efa14d.chunk.js": "/static/js/2.c8efa14d.chunk.js",
+        "static/js/2.c8efa14d.chunk.js.map": "/static/js/2.c8efa14d.chunk.js.map",
+        "index.html": "/index.html",
+        "precache-manifest.7cd6d5829df5b86b17ce2a89fc0c44ba.js": "/precache-manifest.7cd6d5829df5b86b17ce2a89fc0c44ba.js",
+        "service-worker.js": "/service-worker.js",
+        "static/css/2.47271137.chunk.css.map": "/static/css/2.47271137.chunk.css.map",
+        "static/css/main.d979cc09.chunk.css.map": "/static/css/main.d979cc09.chunk.css.map",
+        "static/js/2.c8efa14d.chunk.js.LICENSE.txt": "/static/js/2.c8efa14d.chunk.js.LICENSE.txt",
+        "static/media/App.css": "/static/media/scoreboardfont.a8e5f453.ttf",
+        "static/media/WasteWiselogo.jpg": "/static/media/WasteWiselogo.e6689338.jpg",
+        "static/media/fifthHowToSlide.png": "/static/media/fifthHowToSlide.4eae8aab.png",
+        "static/media/firstHowToSlide.png": "/static/media/firstHowToSlide.78384fb0.png",
+        "static/media/fourthHowToSlide.png": "/static/media/fourthHowToSlide.d187aed8.png",
+        "static/media/index.css": "/static/media/roboto-latin-900italic.ebf6d164.woff2",
+        "static/media/secondHowToSlide.png": "/static/media/secondHowToSlide.0c080d91.png",
+        "static/media/thirdHowToSlide.png": "/static/media/thirdHowToSlide.e59638b2.png"
+    },
+    "entrypoints": [
+        "static/js/runtime-main.7e26b5fb.js",
+        "static/css/2.47271137.chunk.css",
+        "static/js/2.c8efa14d.chunk.js",
+        "static/css/main.d979cc09.chunk.css",
+        "static/js/main.0fcbee64.chunk.js"
+    ]
 }
