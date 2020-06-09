@@ -8,8 +8,8 @@ cloudinaryClient.config({
 
 const generateCloudinarySignature = (req, res) => {
     console.log('signature: ', req.body)
-    const params_to_sign = req.body.data.params_to_sign
-    const signature = cloudinaryClient.api_sign_request(
+    const params_to_sign = req.body.data
+    const signature = cloudinaryClient.utils.api_sign_request(
         params_to_sign,
         process.env.CLOUDINARY_API_SECRET
     )

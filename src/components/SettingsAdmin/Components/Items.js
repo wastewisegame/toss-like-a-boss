@@ -136,6 +136,24 @@ const styles = (theme) => ({
     notchedOutline: { borderColor: 'black' },
 })
 
+const generateCloudinarySignature = (callback, params_to_sign) => {
+    console.log('calling generateCLoudSig')
+    axios
+        .post('/api/cloudinary', { data: params_to_sign })
+        .then((signature) => {
+            console.log('back with the signature: ', signature)
+            callback(signature.data)
+        })
+        .catch((xhr, status, error) => {
+            console.log(
+                'xhr --> %s  status --> %s  error --> %s ',
+                xhr,
+                status,
+                error
+            )
+        })
+}
+
 class Items extends Component {
     state = {
         toggleAdd: false,
@@ -280,10 +298,6 @@ class Items extends Component {
         })
     }
 
-    // validateItemToSave = () => {
-
-    // }
-
     /**
      * Cloudinary unsigned upload
      **/
@@ -293,7 +307,7 @@ class Items extends Component {
         {
             cloudName: 'wwgamesortcdn',
             uploadPreset: 'signed_preset_default',
-            uploadSignature: this.generateCloudinarySignature,
+            uploadSignature: generateCloudinarySignature,
             uploadSignatureTimestamp: Date.now(),
             authenticated: true,
             apiKey: '959762355421156',
@@ -332,23 +346,6 @@ class Items extends Component {
         } else {
             return
         }
-    }
-    generateCloudinarySignature = (callback, params_to_sign) => {
-        console.log('calling generateCLoudSig')
-        axios
-            .post('/api/cloudinary', { data: params_to_sign })
-            .then((signature) => {
-                console.log('back with the signature: ', signature)
-                callback(signature)
-            })
-            .catch((xhr, status, error) => {
-                console.log(
-                    'xhr --> %s  status --> %s  error --> %s ',
-                    xhr,
-                    status,
-                    error
-                )
-            })
     }
 
     render() {
