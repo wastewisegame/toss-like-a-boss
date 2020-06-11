@@ -137,7 +137,6 @@ const styles = (theme) => ({
 })
 
 const generateCloudinarySignature = (callback, params_to_sign) => {
-    console.log('calling generateCLoudSig')
     axios
         .post('/api/cloudinary', { data: params_to_sign })
         .then((signature) => {
