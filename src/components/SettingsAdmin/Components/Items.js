@@ -20,6 +20,8 @@ import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+import TableComponent from './Table'
+
 //Declaring SweetAlert for use later in this file
 const MySwal = withReactContent(Swal)
 
@@ -530,7 +532,8 @@ class Items extends Component {
 
                 <br />
                 <br />
-                <Grid container spacing={4} justify="center">
+                <TableComponent />
+                {/* <Grid container spacing={4} justify="center">
                     <Grid item sm={2}></Grid>
                     <Grid item sm={8}>
                         <Card className={classes.card}>
@@ -585,7 +588,7 @@ class Items extends Component {
                         </Card>
                     </Grid>
                     <Grid item sm={2}></Grid>
-                </Grid>
+                </Grid> */}
 
                 <Modal
                     aria-labelledby="edit item"
