@@ -388,7 +388,6 @@ class Items extends Component {
                 </tr>
             )
         })
-
         return (
             <div>
                 <span className={classes.addItem}>Add Item</span>
@@ -537,7 +536,28 @@ class Items extends Component {
                             title: 'Edit',
                             field: 'edit',
                             render: (rowData) => (
-                                <td className={classes.cardContentIcons}>
+                                <td className={classes.cardContentIconsLeft}>
+                                    <Button
+                                        onClick={() =>
+                                            this.handleItemEditOpen(
+                                                item.name,
+                                                item.receptacle,
+                                                item.item_text,
+                                                item.url,
+                                                item.id
+                                            )
+                                        }
+                                    >
+                                        <Edit />
+                                    </Button>
+                                </td>
+                            ),
+                        },
+                        {
+                            title: 'Delete',
+                            field: 'delete',
+                            render: (rowData) => {
+                                ;<td className={classes.cardContentIcons}>
                                     <Button
                                         onClick={() =>
                                             this.handleDelete(
@@ -549,9 +569,8 @@ class Items extends Component {
                                         <Delete />
                                     </Button>
                                 </td>
-                            ),
+                            },
                         },
-                        { title: 'Delete', field: 'delete' },
                         { title: 'Item Name', field: 'name' },
                         { title: 'Receptacle', field: 'receptacle' },
                         {
@@ -568,61 +587,61 @@ class Items extends Component {
                     data={this.props.item}
                 />
                 {/* <Grid container spacing={4} justify="center">
-                    <Grid item sm={2}></Grid>
-                    <Grid item sm={8}>
-                        <Card className={classes.card}>
-                            <CardActions style={{ backgroundColor: '#EEF1F1' }}>
-                                <Grid item sm={5}></Grid>
-                                <Grid item sm={2}>
-                                    <span
-                                        className={classes.cardHeader}
-                                        style={{ marginLeft: 'auto' }}
-                                    >
-                                        Items
-                                    </span>
-                                </Grid>
-                                <Grid
-                                    item
-                                    sm={5}
-                                    style={{ textAlign: 'right' }}
-                                ></Grid>
-                            </CardActions>
-                            <CardContent style={{ backgroundColor: '#EEF1F1' }}>
-                                {this.props.item[0] && (
-                                    <table className={classes.tableItem}>
-                                        <thead>
-                                            <tr>
-                                                <th className={classes.edit}>
-                                                    Edit
-                                                </th>
-                                                <th className={classes.delete}>
-                                                    Delete
-                                                </th>
-                                                <th
-                                                    className={classes.itemName}
-                                                >
-                                                    Item Name
-                                                </th>
-                                                <th
-                                                    className={
-                                                        classes.receptacle
-                                                    }
-                                                >
-                                                    Receptacle
-                                                </th>
-                                                <th className={classes.image}>
-                                                    Image
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>{itemList}</tbody>
-                                    </table>
-                                )}
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item sm={2}></Grid>
-                </Grid> */}
+                  <Grid item sm={2}></Grid>
+                  <Grid item sm={8}>
+                      <Card className={classes.card}>
+                          <CardActions style={{ backgroundColor: '#EEF1F1' }}>
+                              <Grid item sm={5}></Grid>
+                              <Grid item sm={2}>
+                                  <span
+                                      className={classes.cardHeader}
+                                      style={{ marginLeft: 'auto' }}
+                                  >
+                                      Items
+                                  </span>
+                              </Grid>
+                              <Grid
+                                  item
+                                  sm={5}
+                                  style={{ textAlign: 'right' }}
+                              ></Grid>
+                          </CardActions>
+                          <CardContent style={{ backgroundColor: '#EEF1F1' }}>
+                              {this.props.item[0] && (
+                                  <table className={classes.tableItem}>
+                                      <thead>
+                                          <tr>
+                                              <th className={classes.edit}>
+                                                  Edit
+                                              </th>
+                                              <th className={classes.delete}>
+                                                  Delete
+                                              </th>
+                                              <th
+                                                  className={classes.itemName}
+                                              >
+                                                  Item Name
+                                              </th>
+                                              <th
+                                                  className={
+                                                      classes.receptacle
+                                                  }
+                                              >
+                                                  Receptacle
+                                              </th>
+                                              <th className={classes.image}>
+                                                  Image
+                                              </th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>{itemList}</tbody>
+                                  </table>
+                              )}
+                          </CardContent>
+                      </Card>
+                  </Grid>
+                  <Grid item sm={2}></Grid>
+              </Grid> */}
 
                 <Modal
                     aria-labelledby="edit item"
