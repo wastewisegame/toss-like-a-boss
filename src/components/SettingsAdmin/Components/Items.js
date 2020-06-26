@@ -19,8 +19,7 @@ import { withStyles } from '@material-ui/styles'
 import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
-import TableComponent from './Table'
+import MaterialTable from 'material-table'
 
 //Declaring SweetAlert for use later in this file
 const MySwal = withReactContent(Swal)
@@ -532,7 +531,42 @@ class Items extends Component {
 
                 <br />
                 <br />
-                <TableComponent />
+                <MaterialTable
+                    columns={[
+                        {
+                            title: 'Edit',
+                            field: 'edit',
+                            render: (rowData) => (
+                                <td className={classes.cardContentIcons}>
+                                    <Button
+                                        onClick={() =>
+                                            this.handleDelete(
+                                                rowData.name,
+                                                rowData.id
+                                            )
+                                        }
+                                    >
+                                        <Delete />
+                                    </Button>
+                                </td>
+                            ),
+                        },
+                        { title: 'Delete', field: 'delete' },
+                        { title: 'Item Name', field: 'name' },
+                        { title: 'Receptacle', field: 'receptacle' },
+                        {
+                            title: 'Image',
+                            field: 'url',
+                            render: (rowData) => (
+                                <img
+                                    className={classes.image}
+                                    src={rowData.url}
+                                />
+                            ),
+                        },
+                    ]}
+                    data={this.props.item}
+                />
                 {/* <Grid container spacing={4} justify="center">
                     <Grid item sm={2}></Grid>
                     <Grid item sm={8}>
