@@ -20,6 +20,13 @@ import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import MaterialTable from 'material-table'
+import AddBox from '@material-ui/icons/AddBox'
+import ArrowDownward from '@material-ui/icons/ArrowDownward'
+import Check from '@material-ui/icons/Check'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import ChevronRight from '@material-ui/icons/ChevronRight'
+import Clear from '@material-ui/icons/Clear'
+import DeleteOutline from '@material-ui/icons/DeleteOutline'
 
 //Declaring SweetAlert for use later in this file
 const MySwal = withReactContent(Swal)
@@ -349,45 +356,6 @@ class Items extends Component {
     render() {
         //Allows for classes when using Material-UI styling.
         const { classes } = this.props
-
-        //Item list variable, containing a loop to display all items in the database to the DOM in a table format.
-        let itemList = this.props.item.map((item) => {
-            return (
-                <tr>
-                    <td className={classes.cardContentIconsLeft}>
-                        <Button
-                            onClick={() =>
-                                this.handleItemEditOpen(
-                                    item.name,
-                                    item.receptacle,
-                                    item.item_text,
-                                    item.url,
-                                    item.id
-                                )
-                            }
-                        >
-                            <Edit />
-                        </Button>
-                    </td>
-                    <td className={classes.cardContentIcons}>
-                        <Button
-                            onClick={() =>
-                                this.handleDelete(item.name, item.id)
-                            }
-                        >
-                            <Delete />
-                        </Button>
-                    </td>
-                    <td className={classes.cardContentItems}>{item.name}</td>
-                    <td className={classes.cardContentItems}>
-                        {item.receptacle}
-                    </td>
-                    <td className={classes.cardContentItems}>
-                        <img className={classes.image} src={item.url} />
-                    </td>
-                </tr>
-            )
-        })
         return (
             <div>
                 <span className={classes.addItem}>Add Item</span>
@@ -527,37 +495,34 @@ class Items extends Component {
                         )}
                     </div>
                 )}
-
-                <br />
-                <br />
                 <MaterialTable
                     columns={[
                         {
                             title: 'Edit',
                             field: 'edit',
                             render: (rowData) => (
-                                <td className={classes.cardContentIconsLeft}>
+                                <span className={classes.cardContentIconsLeft}>
                                     <Button
                                         onClick={() =>
                                             this.handleItemEditOpen(
-                                                item.name,
-                                                item.receptacle,
-                                                item.item_text,
-                                                item.url,
-                                                item.id
+                                                rowData.name,
+                                                rowData.receptacle,
+                                                rowData.item_text,
+                                                rowData.url,
+                                                rowData.id
                                             )
                                         }
                                     >
                                         <Edit />
                                     </Button>
-                                </td>
+                                </span>
                             ),
                         },
                         {
                             title: 'Delete',
                             field: 'delete',
-                            render: (rowData) => {
-                                ;<td className={classes.cardContentIcons}>
+                            render: (rowData) => (
+                                <span className={classes.cardContentIcons}>
                                     <Button
                                         onClick={() =>
                                             this.handleDelete(
@@ -568,8 +533,8 @@ class Items extends Component {
                                     >
                                         <Delete />
                                     </Button>
-                                </td>
-                            },
+                                </span>
+                            ),
                         },
                         { title: 'Item Name', field: 'name' },
                         { title: 'Receptacle', field: 'receptacle' },
@@ -585,7 +550,21 @@ class Items extends Component {
                         },
                     ]}
                     data={this.props.item}
+                    options={{
+                        search: true,
+                    }}
+                    // icons={{
+                    //   FirstPage: 'first_page',
+                    //   LastPage: 'last_page',
+                    //   PreviousPage: 'previous_page',
+                    //   NextPage: 'next_page',
+                    //   Search: 'search',
+                    //   ResetSearch: 'reset_search',
+                    // }}
                 />
+
+                <br />
+                <br />
                 {/* <Grid container spacing={4} justify="center">
                   <Grid item sm={2}></Grid>
                   <Grid item sm={8}>
