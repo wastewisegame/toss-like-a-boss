@@ -19,8 +19,14 @@ import { withStyles } from '@material-ui/styles'
 import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
-import TableComponent from './Table'
+import MaterialTable from 'material-table'
+import AddBox from '@material-ui/icons/AddBox'
+import ArrowDownward from '@material-ui/icons/ArrowDownward'
+import Check from '@material-ui/icons/Check'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import ChevronRight from '@material-ui/icons/ChevronRight'
+import Clear from '@material-ui/icons/Clear'
+import DeleteOutline from '@material-ui/icons/DeleteOutline'
 
 //Declaring SweetAlert for use later in this file
 const MySwal = withReactContent(Swal)
@@ -350,46 +356,6 @@ class Items extends Component {
     render() {
         //Allows for classes when using Material-UI styling.
         const { classes } = this.props
-
-        //Item list variable, containing a loop to display all items in the database to the DOM in a table format.
-        let itemList = this.props.item.map((item) => {
-            return (
-                <tr>
-                    <td className={classes.cardContentIconsLeft}>
-                        <Button
-                            onClick={() =>
-                                this.handleItemEditOpen(
-                                    item.name,
-                                    item.receptacle,
-                                    item.item_text,
-                                    item.url,
-                                    item.id
-                                )
-                            }
-                        >
-                            <Edit />
-                        </Button>
-                    </td>
-                    <td className={classes.cardContentIcons}>
-                        <Button
-                            onClick={() =>
-                                this.handleDelete(item.name, item.id)
-                            }
-                        >
-                            <Delete />
-                        </Button>
-                    </td>
-                    <td className={classes.cardContentItems}>{item.name}</td>
-                    <td className={classes.cardContentItems}>
-                        {item.receptacle}
-                    </td>
-                    <td className={classes.cardContentItems}>
-                        <img className={classes.image} src={item.url} />
-                    </td>
-                </tr>
-            )
-        })
-
         return (
             <div>
                 <span className={classes.addItem}>Add Item</span>
@@ -529,67 +495,67 @@ class Items extends Component {
                         )}
                     </div>
                 )}
-
-                <br />
-                <br />
-                <TableComponent />
-                {/* <Grid container spacing={4} justify="center">
-                    <Grid item sm={2}></Grid>
-                    <Grid item sm={8}>
-                        <Card className={classes.card}>
-                            <CardActions style={{ backgroundColor: '#EEF1F1' }}>
-                                <Grid item sm={5}></Grid>
-                                <Grid item sm={2}>
-                                    <span
-                                        className={classes.cardHeader}
-                                        style={{ marginLeft: 'auto' }}
+                <MaterialTable
+                    columns={[
+                        {
+                            title: 'Edit',
+                            field: 'edit',
+                            render: (rowData) => (
+                                <span className={classes.cardContentIconsLeft}>
+                                    <Button
+                                        onClick={() =>
+                                            this.handleItemEditOpen(
+                                                rowData.name,
+                                                rowData.receptacle,
+                                                rowData.item_text,
+                                                rowData.url,
+                                                rowData.id
+                                            )
+                                        }
                                     >
-                                        Items
-                                    </span>
-                                </Grid>
-                                <Grid
-                                    item
-                                    sm={5}
-                                    style={{ textAlign: 'right' }}
-                                ></Grid>
-                            </CardActions>
-                            <CardContent style={{ backgroundColor: '#EEF1F1' }}>
-                                {this.props.item[0] && (
-                                    <table className={classes.tableItem}>
-                                        <thead>
-                                            <tr>
-                                                <th className={classes.edit}>
-                                                    Edit
-                                                </th>
-                                                <th className={classes.delete}>
-                                                    Delete
-                                                </th>
-                                                <th
-                                                    className={classes.itemName}
-                                                >
-                                                    Item Name
-                                                </th>
-                                                <th
-                                                    className={
-                                                        classes.receptacle
-                                                    }
-                                                >
-                                                    Receptacle
-                                                </th>
-                                                <th className={classes.image}>
-                                                    Image
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>{itemList}</tbody>
-                                    </table>
-                                )}
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    <Grid item sm={2}></Grid>
-                </Grid> */}
-
+                                        <Edit />
+                                    </Button>
+                                </span>
+                            ),
+                        },
+                        {
+                            title: 'Delete',
+                            field: 'delete',
+                            render: (rowData) => (
+                                <span className={classes.cardContentIcons}>
+                                    <Button
+                                        onClick={() =>
+                                            this.handleDelete(
+                                                rowData.name,
+                                                rowData.id
+                                            )
+                                        }
+                                    >
+                                        <Delete />
+                                    </Button>
+                                </span>
+                            ),
+                        },
+                        { title: 'Item Name', field: 'name' },
+                        { title: 'Receptacle', field: 'receptacle' },
+                        {
+                            title: 'Image',
+                            field: 'url',
+                            render: (rowData) => (
+                                <img
+                                    className={classes.image}
+                                    src={rowData.url}
+                                />
+                            ),
+                        },
+                    ]}
+                    data={this.props.item}
+                    options={{
+                        search: true,
+                    }}
+                />
+                <br />
+                <br />
                 <Modal
                     aria-labelledby="edit item"
                     aria-describedby="edit item"
