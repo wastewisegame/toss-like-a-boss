@@ -12,7 +12,6 @@ import './Nav.css'
 import { withStyles } from '@material-ui/styles'
 
 // Icons and Logos for the App. Found on the Nav Bar.
-import mainlogo from '../../img/WasteWiselogo.jpg'
 import Icon from '@mdi/react'
 import { mdiDoorOpen } from '@mdi/js'
 import { mdiGamepadSquare } from '@mdi/js'
@@ -21,6 +20,9 @@ import { mdiHelpCircle } from '@mdi/js'
 import { mdiAccountPlus } from '@mdi/js'
 import { mdiDoorClosedLock } from '@mdi/js'
 import { mdiTableLarge } from '@mdi/js'
+
+const mainLogo =
+    'https://res.cloudinary.com/wwgamesortcdn/image/upload/v1593786710/kyzri9z9p15coogrnpso.jpg'
 
 function TabContainer(props) {
     return (
@@ -109,8 +111,12 @@ class Nav extends React.Component {
                     >
                         {/* <Tab label="Know What to Throw" /> */}
                         <img
-                            src={mainlogo}
-                            style={{ width: 150, height: 100 }}
+                            src={mainLogo}
+                            style={{
+                                width: 'auto',
+                                height: 'auto',
+                                maxWidth: '100px',
+                            }}
                         />
                         {!this.props.user.id && (
                             <Tab
