@@ -63,7 +63,7 @@ class CompostBinChoice extends Component {
                             variant="contained"
                             onClick={() => this.props.history.push('/game')}
                         >
-                            I have Trash, Recycling, and Composting
+                            Three Stream
                         </Button>
                         <Button
                             className={this.props.classes.button}
@@ -71,7 +71,7 @@ class CompostBinChoice extends Component {
                             variant="contained"
                             onClick={this.noCompostClick}
                         >
-                            I only have Trash and Recycling
+                            Two Stream
                         </Button>
                     </div>
                 </div>
