@@ -155,7 +155,10 @@ class Game extends Component {
             this.props.currentGameValue >
             this.props.gameItemsReducer.length - 1
         ) {
-            this.props.history.push('/results')
+            this.props.history.push({
+                pathName: '/results',
+                state: { gameItems: this.props.gameItems.length },
+            })
         }
     }
 
@@ -200,7 +203,8 @@ class Game extends Component {
                                     }
                                 >
                                     Items Remaining:
-                                    {15 - this.props.currentGameValue}
+                                    {this.props.gameItems.length -
+                                        this.props.currentGameValue}
                                 </Typography>
                                 <Typography
                                     className={
