@@ -117,6 +117,7 @@ class Nav extends React.Component {
                                 height: 'auto',
                                 maxWidth: '100px',
                             }}
+                            alt="minnesota-waste-wise-logo"
                         />
                         {!this.props.user.id && (
                             <Tab
