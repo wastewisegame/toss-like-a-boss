@@ -12,18 +12,36 @@ const { rejectNotAdmin } = require('../modules/authentication-middleware')
 
 router.get('/', (req, res) => {
     //get 15 random items from list for the game
-    const queryText = `
-    SELECT *,(SELECT count(*) FROM "item") AS ct
-    FROM "item"
-    ORDER BY random()
-    LIMIT 15;
-    `
-    pool.query(queryText)
-        .then((result) => res.send(result.rows))
-        .catch((error) => {
-            console.log('error in item get', error)
-            res.sendStatus(500)
-        })
+    const { query } = req
+    if (query.noCompost) {
+        console.log('no compost this game.')
+        const queryText = `
+        SELECT *,(SELECT count(*) FROM "item") AS ct
+        FROM "item"
+        WHERE "receptacle" <> 'compost'
+        ORDER BY random()
+        LIMIT 15;
+        `
+        pool.query(queryText)
+            .then((result) => res.send(result.rows))
+            .catch((error) => {
+                console.log('error in item get', error)
+                res.sendStatus(500)
+            })
+    } else {
+        const queryText = `
+        SELECT *,(SELECT count(*) FROM "item") AS ct
+        FROM "item"
+        ORDER BY random()
+        LIMIT 15;
+        `
+        pool.query(queryText)
+            .then((result) => res.send(result.rows))
+            .catch((error) => {
+                console.log('error in item get', error)
+                res.sendStatus(500)
+            })
+    }
 })
 
 // updates database to increment correct count and

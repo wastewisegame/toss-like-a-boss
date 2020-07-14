@@ -118,9 +118,16 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch({
-            type: 'FETCH_GAME_ITEMS',
-        })
+        console.log('COMPOST BIN COMPONENT DID MOUNT: ', this.props.compostBin)
+        if (this.props.compostBin) {
+            this.props.dispatch({
+                type: 'FETCH_GAME_ITEMS',
+            })
+        } else {
+            this.props.dispatch({
+                type: 'FETCH_GAME_ITEMS_NO_COMPOST',
+            })
+        }
     }
 
     //stops timer when game is completed

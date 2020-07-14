@@ -21,6 +21,18 @@ function* fetchGameItems(action) {
         })
     } catch (error) {}
 }
+function* fetchGameItemsNoCompost(action) {
+    console.log('FETCH GAMES NO COMPOST ACTION: %s', JSON.stringify(action))
+    try {
+        const response = yield axios.get(`/api/item`, {
+            params: { noCompost: true },
+        })
+        yield put({
+            type: 'SET_GAME_ITEMS',
+            payload: response.data,
+        })
+    } catch (error) {}
+}
 
 function* firstTryCorrect(action) {
     try {
@@ -76,6 +88,7 @@ function* fetchCurrentContestInfo(action) {
 
 function* gameSaga() {
     yield takeEvery('FETCH_GAME_ITEMS', fetchGameItems)
+    yield takeEvery('FETCH_GAME_ITEMS_NO_COMPOST', fetchGameItemsNoCompost)
     yield takeEvery('ADD_WRONG_ANSWER', addWrongAnswer)
     yield takeEvery('FIRST_TRY_CORRECT', firstTryCorrect)
     yield takeEvery('FIRST_TRY_INCORRECT', firstTryIncorrect)
