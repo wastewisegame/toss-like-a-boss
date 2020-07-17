@@ -4,7 +4,7 @@ import { put, takeEvery } from 'redux-saga/effects'
 function* getLeaderboard(action) {
     console.log('get LEADERBOARD: ', action.payload)
     try {
-        let response = yield axios.get(
+        const response = yield axios.get(
             `api/score/leaderboard/${action.payload}`
         )
         yield put({

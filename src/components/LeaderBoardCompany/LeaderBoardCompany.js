@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import LeaderboardList from '../LeaderboardList/LeaderboardList'
-
+import axios from 'axios'
 //Material UI Components
 import { withStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
@@ -33,14 +33,28 @@ class Leaderboard extends Component {
     }
 
     getLeaderboardInfo() {
-        const contestIdNumber = this.props.history.location.search
-            .split('=')
-            .pop()
-        this.props.dispatch({
-            type: 'FETCH_LEADERBOARD',
-            payload: contestIdNumber,
-            // payload: contestIdNumber
-        })
+        axios
+            .get(
+                `api/score/leaderboard/${this.props.history.location.search
+                    .split('=')
+                    .pop()}`
+            )
+            .then((response) => {
+                console.log('leaderboard fetch during DidMount', response.data)
+                this.props.dispatch({
+                    type: 'SET_LEADERBOARD',
+                    payload: response.data,
+                })
+            })
+            .catch((e) => console.log('error getting leaderboard: ', e))
+        // const contestIdNumber = this.props.history.location.search
+        //     .split('=')
+        //     .pop()
+        // this.props.dispatch({
+        //     type: 'FETCH_LEADERBOARD',
+        //     payload: contestIdNumber,
+        //     // payload: contestIdNumber
+        // })
     }
     //playAgain brings the user back to the gamelaunch page where they can choose to continue playing or if they want to register for a contest then they can play in a contest.
     playAgain = () => {
@@ -92,6 +106,7 @@ class Leaderboard extends Component {
                                         (player, i) => {
                                             return (
                                                 <LeaderboardList
+                                                    key={i}
                                                     player={player}
                                                     i={i}
                                                 />
