@@ -142,7 +142,8 @@ class GameLaunch extends Component {
         firstName: '',
         lastName: '',
         contestPlayReady: false,
-        teamName: '',
+        team: '',
+        team_name: '',
         modalOpen: false,
     }
 
@@ -172,7 +173,7 @@ class GameLaunch extends Component {
         this.props.dispatch({
             type: 'FETCH_TEAM_ID_NUMBER',
             payload: {
-                teamName: this.state.teamName,
+                teamName: this.state.team,
                 organizationId: this.props.compostBoolean[0].organization_id,
             },
         })
@@ -228,16 +229,28 @@ class GameLaunch extends Component {
         //hits reducer to remove compost bin from game if contest has no compost
         if (!this.props.compostBoolean[0].compost) {
             this.props.dispatch({
-                type: 'NO_COMPOST_BIN',
+                type: 'COMPOST_BIN',
+                payload: false,
             })
         }
         this.props.history.push(`/game${this.props.history.location.search}`)
     }
 
     handleChange = (name) => (event) => {
+        console.log('handleChange: ', name)
+        console.log('event: ', event)
         this.setState({
             [name]: event.target.value,
         })
+    }
+    handleTeamChange = (name) => (event) => {
+        console.log('team Change: ', event)
+        this.setState({ team: event.target.value })
+        const selectedTeam = this.props.teamNames.find(
+            (team) => event.target.value === team.id
+        )
+        console.log('team selected: ', selectedTeam)
+        this.setState({ team_name: selectedTeam.team_name })
     }
 
     handleOpen = () => {
@@ -258,8 +271,13 @@ class GameLaunch extends Component {
     }
 
     render() {
-        let teamNameArray = this.props.teamNames.map((name) => {
-            return <MenuItem value={name.team_name}>{name.team_name}</MenuItem>
+        const teamNameArray = this.props.teamNames.map((team, index) => {
+            console.log('team name array builder: ', team)
+            return (
+                <MenuItem key={index} value={team.id}>
+                    {team.team_name}
+                </MenuItem>
+            )
         })
 
         let moment = require('moment')
@@ -497,13 +515,10 @@ class GameLaunch extends Component {
                                                         Team Select
                                                     </InputLabel>
                                                     <Select
+                                                        required
                                                         label="Team Name"
-                                                        value={
-                                                            this.state.teamName
-                                                        }
-                                                        onChange={this.handleChange(
-                                                            'teamName'
-                                                        )}
+                                                        value={this.state.team}
+                                                        onChange={this.handleTeamChange()}
                                                     >
                                                         <MenuItem
                                                             default
@@ -523,9 +538,6 @@ class GameLaunch extends Component {
                                                 <div>
                                                     <Typography component="div">
                                                         <Box
-                                                            onClick={() =>
-                                                                this.handlePresoClick()
-                                                            }
                                                             fontSize="body1.fontSize"
                                                             textAlign="center"
                                                         >

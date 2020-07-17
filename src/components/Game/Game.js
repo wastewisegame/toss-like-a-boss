@@ -119,7 +119,19 @@ class Game extends Component {
 
     componentDidMount() {
         console.log('COMPOST BIN COMPONENT DID MOUNT: ', this.props.compostBin)
-        if (this.props.compostBin) {
+        //check if game has a contest, if yes - then inspect if we need compost items or not.
+        //if not a contest, check props to see if the guest selected compost or not.
+        if (this.props.location.search) {
+            if (this.props.reduxStore.contestCompostBooleanReducer[0].compost) {
+                this.props.dispatch({
+                    type: 'FETCH_GAME_ITEMS',
+                })
+            } else {
+                this.props.dispatch({
+                    type: 'FETCH_GAME_ITEMS_NO_COMPOST',
+                })
+            }
+        } else if (this.props.compostBin) {
             this.props.dispatch({
                 type: 'FETCH_GAME_ITEMS',
             })

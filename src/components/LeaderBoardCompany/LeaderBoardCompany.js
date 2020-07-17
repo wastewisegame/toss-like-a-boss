@@ -32,12 +32,6 @@ class Leaderboard extends Component {
         this.getLeaderboardInfo()
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.store !== prevProps.store) {
-            //this.getLeaderboardInfo();
-        }
-    }
-
     getLeaderboardInfo() {
         const contestIdNumber = this.props.history.location.search
             .split('=')

@@ -76,9 +76,7 @@ class ResultsGuestPlayer extends Component {
                 contestIdNumber: this.props.reduxStore.currentContestInfo.id,
                 organizationIdNumber: this.props.reduxStore.currentContestInfo
                     .organization_id,
-                teamIdNumber: this.props.teamIdNumber.id
-                    ? this.props.teamIdNumber.id
-                    : 0,
+                teamIdNumber: this.props.teamIdNumber,
             },
         })
     }
@@ -194,6 +192,7 @@ class ResultsGuestPlayer extends Component {
 }
 
 const mapStateToProps = (reduxStore) => {
+    console.log('MAP STATE TO PROPS: ', reduxStore)
     return {
         gameScore: reduxStore.gameScoreReducer,
         gameWrongAnswers: reduxStore.gameWrongAnswerReducer,
@@ -201,7 +200,9 @@ const mapStateToProps = (reduxStore) => {
         contestUserInfo: reduxStore.contestUserInfoReducer,
         organizationInfo: reduxStore.organizationTeamNameReducer,
         contestInfo: reduxStore.contestCompostBooleanReducer,
-        teamIdNumber: reduxStore.teamIdNumberReducer,
+        teamIdNumber: reduxStore.contestUserInfoReducer.team
+            ? reduxStore.contestUserInfoReducer.team
+            : null,
         reduxStore,
     }
 }

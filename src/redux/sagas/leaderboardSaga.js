@@ -2,6 +2,7 @@ import axios from 'axios'
 import { put, takeEvery } from 'redux-saga/effects'
 
 function* getLeaderboard(action) {
+    console.log('get LEADERBOARD: ', action.payload)
     try {
         let response = yield axios.get(
             `api/score/leaderboard/${action.payload}`
@@ -14,6 +15,7 @@ function* getLeaderboard(action) {
 }
 
 function* sendContestGameData(action) {
+    console.log('SEND CONTEST DATA : ', action.payload)
     try {
         yield axios.post(`api/score`, action.payload)
     } catch (error) {}

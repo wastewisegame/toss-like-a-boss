@@ -96,11 +96,9 @@ router.get(`/compost/:id`, (req, res) => {
 
 //CURRENT CONTEST INFO GET
 router.get(`/currentcontest/:id`, (req, res) => {
-    console.log('the current contest req.body', req.params.id)
     const sqlText = `SELECT * FROM "contest" WHERE "access_code" = $1;`
     pool.query(sqlText, [req.params.id])
         .then((result) => {
-            console.log('Contest Info GET from database:', result)
             res.send(result.rows)
         })
         .catch((error) => {

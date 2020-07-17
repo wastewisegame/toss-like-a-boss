@@ -1,10 +1,10 @@
 const compostBinReducer = (state = true, action) => {
     switch (action.type) {
-        case 'NO_COMPOST_BIN':
-            return false;
+        case 'COMPOST_BIN':
+            return action.payload
         default:
-            return state;
+            return state
     }
 }
 
-export default compostBinReducer;
+export default compostBinReducer
