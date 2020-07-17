@@ -142,7 +142,12 @@ class GameLaunch extends Component {
         firstName: '',
         lastName: '',
         contestPlayReady: false,
-        teamName: '',
+        team: {
+            id: '',
+            team_name: '',
+            organization_id: '',
+        },
+        team_name: '',
         modalOpen: false,
     }
 
@@ -236,9 +241,16 @@ class GameLaunch extends Component {
     }
 
     handleChange = (name) => (event) => {
+        console.log('handleChange: ', name)
+        console.log('event: ', event)
         this.setState({
             [name]: event.target.value,
         })
+    }
+    handleTeamChange = (name) => (event) => {
+        console.log('team Change: ', event)
+        this.setState({ team: event.target.value })
+        this.setState({ team_name: event.target.value.team_name })
     }
 
     handleOpen = () => {
@@ -259,8 +271,13 @@ class GameLaunch extends Component {
     }
 
     render() {
-        let teamNameArray = this.props.teamNames.map((name) => {
-            return <MenuItem value={name.team_name}>{name.team_name}</MenuItem>
+        let teamNameArray = this.props.teamNames.map((team) => {
+            console.log('team name array builder: ', team)
+            return (
+                <MenuItem key={team.id} value={team}>
+                    {team.team_name}
+                </MenuItem>
+            )
         })
 
         let moment = require('moment')
@@ -498,13 +515,12 @@ class GameLaunch extends Component {
                                                         Team Select
                                                     </InputLabel>
                                                     <Select
+                                                        required
                                                         label="Team Name"
                                                         value={
-                                                            this.state.teamName
+                                                            this.state.team_name
                                                         }
-                                                        onChange={this.handleChange(
-                                                            'teamName'
-                                                        )}
+                                                        onChange={this.handleTeamChange()}
                                                     >
                                                         <MenuItem
                                                             default
@@ -524,9 +540,6 @@ class GameLaunch extends Component {
                                                 <div>
                                                     <Typography component="div">
                                                         <Box
-                                                            onClick={() =>
-                                                                this.handlePresoClick()
-                                                            }
                                                             fontSize="body1.fontSize"
                                                             textAlign="center"
                                                         >

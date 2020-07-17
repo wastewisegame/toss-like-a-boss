@@ -63,13 +63,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 //does not need authentication middleware
 router.get('/names/:id', (req, res) => {
     const sqlText = `
-    SELECT * FROM "team"
+    SELECT "team".id, "team".team_name, "team".organization_id FROM "team"
     JOIN "organization" on "organization".id = "team".organization_id
     JOIN "contest" on "contest".organization_id = "organization".id
     WHERE "contest".access_code = $1;
     `
     pool.query(sqlText, [req.params.id])
         .then((result) => {
+            console.log('results of team name fetcher: ', result.rows)
             res.send(result.rows)
         })
         .catch((error) => {
