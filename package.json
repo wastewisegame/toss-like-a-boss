@@ -58,14 +58,8 @@
         "eject": "react-scripts eject",
         "svgr": "svgr -d src/Icons/ assets/"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
-    },
     "devDependencies": {
         "@svgr/cli": "^4.3.3",
-        "husky": "^4.2.5",
         "nodemon": "^1.18.10",
         "prettier": "^2.0.5",
         "pretty-quick": "^2.0.1",
