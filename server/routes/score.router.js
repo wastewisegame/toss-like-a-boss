@@ -4,8 +4,8 @@ const router = express.Router()
 
 router.get('/leaderboard/:id', (req, res) => {
     console.log('leaderboard GET req.body', req.params)
-    const queryText = `SELECT "team".team_name, "score".id, "score".score, "score".first_name, "score".last_name, "score".team_id, "score".time FROM score 
-                      JOIN "team" ON "score".team_id="team".id
+    const queryText = `SELECT  "score".score, "score".first_name, "score".last_name, "score".time, "team".team_name FROM "score"
+                      LEFT JOIN "team" ON "score".team_id = "team".id 
                       JOIN "contest" ON "score".contest_id = "contest".id
                       WHERE "contest".access_code=$1 
                       ORDER BY "score".score DESC, "score".time 
