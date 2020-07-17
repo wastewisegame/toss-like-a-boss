@@ -48,10 +48,8 @@ class ResultsGuestPlayer extends Component {
     state = {
         numberOfGameItemsUsed: this.props.reduxStore.gameItemsReducer.length,
     }
-    componentDidMount() {
-        this.props.history.location.search && this.sendContestGameData()
-    }
     componentWillUnmount() {
+        this.props.history.location.search && this.sendContestGameData()
         this.props.dispatch({
             type: 'RESET_CURRENT_GAME_VALUE',
         })
@@ -203,7 +201,7 @@ const mapStateToProps = (reduxStore) => {
         organizationInfo: reduxStore.organizationTeamNameReducer,
         contestInfo: reduxStore.contestCompostBooleanReducer,
         teamIdNumber: reduxStore.contestUserInfoReducer.team
-            ? reduxStore.contestUserInfoReducer.team.id
+            ? reduxStore.contestUserInfoReducer.team
             : null,
         reduxStore,
     }

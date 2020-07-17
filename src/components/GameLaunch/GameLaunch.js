@@ -142,11 +142,7 @@ class GameLaunch extends Component {
         firstName: '',
         lastName: '',
         contestPlayReady: false,
-        team: {
-            id: '',
-            team_name: '',
-            organization_id: '',
-        },
+        team: '',
         team_name: '',
         modalOpen: false,
     }
@@ -177,7 +173,7 @@ class GameLaunch extends Component {
         this.props.dispatch({
             type: 'FETCH_TEAM_ID_NUMBER',
             payload: {
-                teamName: this.state.teamName,
+                teamName: this.state.team,
                 organizationId: this.props.compostBoolean[0].organization_id,
             },
         })
@@ -250,7 +246,11 @@ class GameLaunch extends Component {
     handleTeamChange = (name) => (event) => {
         console.log('team Change: ', event)
         this.setState({ team: event.target.value })
-        this.setState({ team_name: event.target.value.team_name })
+        const selectedTeam = this.props.teamNames.find(
+            (team) => event.target.value === team.id
+        )
+        console.log('team selected: ', selectedTeam)
+        this.setState({ team_name: selectedTeam.team_name })
     }
 
     handleOpen = () => {
@@ -271,10 +271,10 @@ class GameLaunch extends Component {
     }
 
     render() {
-        let teamNameArray = this.props.teamNames.map((team) => {
+        const teamNameArray = this.props.teamNames.map((team, index) => {
             console.log('team name array builder: ', team)
             return (
-                <MenuItem key={team.id} value={team}>
+                <MenuItem key={index} value={team.id}>
                     {team.team_name}
                 </MenuItem>
             )
@@ -517,9 +517,7 @@ class GameLaunch extends Component {
                                                     <Select
                                                         required
                                                         label="Team Name"
-                                                        value={
-                                                            this.state.team_name
-                                                        }
+                                                        value={this.state.team}
                                                         onChange={this.handleTeamChange()}
                                                     >
                                                         <MenuItem
