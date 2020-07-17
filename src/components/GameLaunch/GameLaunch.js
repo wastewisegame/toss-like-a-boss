@@ -228,7 +228,8 @@ class GameLaunch extends Component {
         //hits reducer to remove compost bin from game if contest has no compost
         if (!this.props.compostBoolean[0].compost) {
             this.props.dispatch({
-                type: 'NO_COMPOST_BIN',
+                type: 'COMPOST_BIN',
+                payload: false,
             })
         }
         this.props.history.push(`/game${this.props.history.location.search}`)

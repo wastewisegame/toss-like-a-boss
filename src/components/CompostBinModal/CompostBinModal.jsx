@@ -21,8 +21,8 @@ function AlertDialog() {
 
     function noCompostClick() {
         this.props.dispatch({
-            type: 'NO_COMPOST_BIN',
-            payload: true,
+            type: 'COMPOST_BIN',
+            payload: false,
         })
         this.props.history.push('/game')
     }

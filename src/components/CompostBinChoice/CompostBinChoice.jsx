@@ -38,16 +38,17 @@ const styles = {
 class CompostBinChoice extends Component {
     noCompostClick = () => {
         this.props.dispatch({
-            type: 'NO_COMPOST_BIN',
-            payload: true,
+            type: 'COMPOST_BIN',
+            payload: false,
         })
         this.props.history.push('/game')
     }
     compostClick = () => {
         this.props.dispatch({
-            type: 'NO_COMPOST_BIN',
-            payload: false,
+            type: 'COMPOST_BIN',
+            payload: true,
         })
+        this.props.history.push('/game')
     }
     render() {
         return (
@@ -61,7 +62,7 @@ class CompostBinChoice extends Component {
                             className={this.props.classes.button}
                             color="primary"
                             variant="contained"
-                            onClick={() => this.props.history.push('/game')}
+                            onClick={this.compostClick}
                         >
                             Three Stream
                         </Button>

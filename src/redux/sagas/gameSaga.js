@@ -56,10 +56,22 @@ function* getContestCompostBoolean(action) {
     try {
         let id = action.payload
         const response = yield axios.get(`/api/contest/compost/${id}`)
+        console.log('response for contest bool: ', response.data)
         yield put({
             type: 'SET_CONTEST_COMPOST_BOOLEAN',
             payload: response.data,
         })
+        // if(response.data[0].compost){
+        //   console.log('yes to compost.')
+        //   yield put({
+        //     type: 'NO_COMPOST_BIN',
+        //     payload: false
+        //   })
+        // }else{
+        //   yield put({
+        //     type: 'NO_COMPOST_BIN',
+        //     payload : true
+        //   })
     } catch (error) {}
 }
 

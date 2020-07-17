@@ -1,10 +1,10 @@
-const contestCompostBooleanReducer = (state = ['compost': true], action) => {
+const contestCompostBooleanReducer = (state = [{ compost: true }], action) => {
     switch (action.type) {
         case 'SET_CONTEST_COMPOST_BOOLEAN':
-            return action.payload;
+            return action.payload
         default:
-            return state;
+            return state
     }
 }
 
-export default contestCompostBooleanReducer;
+export default contestCompostBooleanReducer
