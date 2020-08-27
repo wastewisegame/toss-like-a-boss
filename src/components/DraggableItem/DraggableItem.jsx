@@ -93,7 +93,7 @@ let DragNDrop = withRouter(
             //if correct on the first try
             if (
               dropResult &&
-              dropResult.name == item.name &&
+              dropResult.name === item.name &&
               firstTry === true
             ) {
               //increments score up by one on first attempt correct
