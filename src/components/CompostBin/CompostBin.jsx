@@ -29,7 +29,7 @@ const CompostBin = ({ canDrop, isOver, connectDropTarget }) => {
   }
   return (
     <div ref={connectDropTarget} style={{ ...style, backgroundColor }}>
-      <h2>Compost</h2>
+      <h2>Organics Recycling</h2>
         <CompostSvg />
     </div>
   );

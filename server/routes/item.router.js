@@ -18,12 +18,22 @@ router.get('/', (req, res) => {
         const queryText = `
         SELECT *,(SELECT count(*) FROM "item") AS ct
         FROM "item"
-        WHERE "receptacle" <> 'compost'
         ORDER BY random()
         LIMIT 15;
         `
+
         pool.query(queryText)
-            .then((result) => res.send(result.rows))
+            .then((result) => {
+                const { rows } = result // destructuring the value held on result.rows into its own variable declaration.
+
+                //since we're not making a new array of things, just mutating properties on the items in the array we can use a .forEach()
+                rows.forEach((rowItem) => {
+                    if (rowItem.receptacle === 'compost') {
+                        rowItem.receptacle = 'garbage'
+                    }
+                })
+                res.send(rows)
+            })
             .catch((error) => {
                 console.log('error in item get', error)
                 res.sendStatus(500)

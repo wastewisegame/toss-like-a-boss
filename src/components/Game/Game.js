@@ -227,7 +227,7 @@ class Game extends Component {
                                     <span
                                         className={this.props.classes.timerText}
                                     >
-                                        {this.state.time}
+                                        {this.state.time} sec
                                     </span>
                                 </Typography>
                             </Grid>
