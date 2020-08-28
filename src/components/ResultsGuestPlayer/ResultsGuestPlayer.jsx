@@ -140,7 +140,7 @@ class ResultsGuestPlayer extends Component {
                                     className={this.props.classes.scoreText}
                                     variant="h3"
                                 >
-                                    TIME: {this.props.gameTime}
+                                    TIME: {this.props.gameTime} sec
                                 </Typography>
                             </div>
                         </Grid>
