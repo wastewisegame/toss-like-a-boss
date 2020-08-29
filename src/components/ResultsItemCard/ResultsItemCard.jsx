@@ -65,7 +65,7 @@ class ResultsItemCard extends Component {
             wrongAnswerArray = this.props.wrongAnswers.map((item) => {
                 return (
                     <Card stackable>
-                        <Image image={item.url && item.url} />
+                        <Image src={item.url && item.url} />
                         <Card.Content>
                             <Card.Header>{item.name}</Card.Header>
                             <Card.Description>
