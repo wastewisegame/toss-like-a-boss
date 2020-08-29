@@ -68,7 +68,7 @@ class ResultsItemCard extends Component {
                         <Card.Content>
                             <Image src={item.url && item.url} />
                             <Card.Header>{item.name}</Card.Header>
-                            <Card.Description className="itemText">
+                            <Card.Description>
                                 {item.item_text}
                             </Card.Description>
                         </Card.Content>
