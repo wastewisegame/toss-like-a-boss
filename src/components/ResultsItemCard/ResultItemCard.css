@@ -10,3 +10,12 @@
 .itemText {
     font-size: 25.5vw;
 }
+
+.img.ui.image {
+    max-height: 250px;
+}
+
+.ui.card > .content > .header,
+.ui.cards > .card > .content > .header {
+    padding-top: 2%;
+}
