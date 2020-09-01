@@ -20,9 +20,9 @@ import { mdiHelpCircle } from '@mdi/js'
 import { mdiAccountPlus } from '@mdi/js'
 import { mdiDoorClosedLock } from '@mdi/js'
 import { mdiTableLarge } from '@mdi/js'
-
-const mainLogo =
-    'https://res.cloudinary.com/wwgamesortcdn/image/upload/v1593786710/kyzri9z9p15coogrnpso.jpg'
+import mainLogo from '../../img/WasteWiseLogo.png'
+// const mainLogo =
+//     'https://res.cloudinary.com/wwgamesortcdn/image/upload/v1593786710/kyzri9z9p15coogrnpso.jpg'
 
 function TabContainer(props) {
     return (
