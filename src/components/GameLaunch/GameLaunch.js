@@ -457,11 +457,16 @@ class GameLaunch extends Component {
                                                 this.props.classes.dialogHeader
                                             }
                                         >
-                                            Are you sure you are ready? You only
-                                            get one chance to play to record a
-                                            score! You can practice all you want
-                                            by clicking cancel and then clicking
-                                            Play.
+                                            You can practice as much as you'd
+                                            like before recording your contest
+                                            score.
+                                            <br />
+                                            <a
+                                                href="https://www.knowwhattothrow.info/#/gamelaunch"
+                                                target="_blank"
+                                            >
+                                                Click here to practice
+                                            </a>
                                         </DialogTitle>
 
                                         <form
