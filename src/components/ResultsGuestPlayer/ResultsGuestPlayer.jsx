@@ -30,6 +30,7 @@ const styles = {
     resultsDiv: {
         backgroundColor: 'lightgrey',
         opacity: 0.8,
+        fontFamily: 'Helvetica Neue',
     },
     leaderboardButton: {
         display: 'flex',
@@ -112,10 +113,7 @@ class ResultsGuestPlayer extends Component {
                             alignItems={'center'}
                         >
                             <div>
-                                <Typography
-                                    className={this.props.classes.scoreText}
-                                    variant="h3"
-                                >
+                                <h1 className={this.props.classes.scoreText}>
                                     SCORE:{' '}
                                     {this.props.gameWrongAnswers.length ===
                                     undefined
@@ -133,29 +131,30 @@ class ResultsGuestPlayer extends Component {
                                             100
                                     )}
                                     %
-                                </Typography>
+                                </h1>
                             </div>
                             <div>
-                                <Typography
+                                <h1
                                     className={this.props.classes.scoreText}
-                                    variant="h3"
+                                    // variant="h3"
                                 >
                                     TIME: {this.props.gameTime} sec
-                                </Typography>
+                                </h1>
                             </div>
                         </Grid>
                     </div>
                     <div>
                         {this.props.history.location.search && (
                             <div>
-                                <Typography
+                                <h2
+                                    fontFamily="Helvetica "
                                     className={
                                         this.props.classes.leaderboardview
                                     }
-                                    variant="h5"
+                                    // variant="h5"
                                 >
                                     VIEW THE CONTEST LEADERBOARD
-                                </Typography>
+                                </h2>
                                 <Button
                                     variant="contained"
                                     color="primary"
