@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 //Material UI Components
@@ -58,6 +58,10 @@ class Nav extends React.Component {
 
     handleChange = (event, value) => {
         this.setState({ value })
+    }
+
+    goToGame = () => {
+        this.props.history.push('/gamelaunch')
     }
     // conditional rendering the view of the nav bar with the icon tab associated with.
     handleSetDefaultValue() {
@@ -119,7 +123,9 @@ class Nav extends React.Component {
                             <Box
                                 fontFamily="chunk"
                                 fontSize="h6.fontSize"
+                                className="gameLogo"
                                 textAlign="center"
+                                onClick={this.goToGame}
                             >
                                 KNOW<br></br> WHAT
                                 <br></br>TO THROW
@@ -283,4 +289,4 @@ const mapStateToProps = (state) => ({
     user: state.user,
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(Nav))
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(Nav)))
