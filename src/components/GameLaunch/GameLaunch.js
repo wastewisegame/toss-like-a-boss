@@ -403,7 +403,10 @@ class GameLaunch extends Component {
                                 </div>
                             )} */}
                             {/* conditionally render CompostBinChoice when play is clicked */}
-                            <CompostBinChoice />
+
+                            {!this.state.contestPlayReady && (
+                                <CompostBinChoice />
+                            )}
                         </Grid>
                     </Grid>
                     <Grid container spacing={24}>
