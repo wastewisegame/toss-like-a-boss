@@ -10,6 +10,7 @@ import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 import './Nav.css'
 import { withStyles } from '@material-ui/styles'
+import Box from '@material-ui/core/Box'
 
 // Icons and Logos for the App. Found on the Nav Bar.
 import Icon from '@mdi/react'
@@ -42,6 +43,7 @@ const styles = (theme) => ({
         flexGrow: 1,
         width: '100%',
         backgroundColor: theme.palette.background.paper,
+        marginBottom: '2%',
     },
 })
 
@@ -110,15 +112,19 @@ class Nav extends React.Component {
                         textColor="primary"
                     >
                         {/* <Tab label="Know What to Throw" /> */}
-                        <img
-                            src={mainLogo}
-                            style={{
-                                width: 'auto',
-                                height: 'auto',
-                                maxWidth: '100px',
-                            }}
-                            alt="minnesota-waste-wise-logo"
-                        />
+                        <Typography
+                            classes={this.props.classes.nameHeader}
+                            component="div"
+                        >
+                            <Box
+                                fontFamily="chunk"
+                                fontSize="h6.fontSize"
+                                textAlign="center"
+                            >
+                                KNOW<br></br> WHAT
+                                <br></br>TO THROW
+                            </Box>
+                        </Typography>
                         {!this.props.user.id && (
                             <Tab
                                 label="PLAY"

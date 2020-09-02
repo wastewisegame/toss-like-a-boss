@@ -309,7 +309,7 @@ class GameLaunch extends Component {
 
         return (
             <div className={this.props.classes.mainDiv}>
-                <Typography
+                {/* <Typography
                     classes={this.props.classes.nameHeader}
                     component="div"
                 >
@@ -320,7 +320,7 @@ class GameLaunch extends Component {
                     >
                         KNOW WHAT TO THROW
                     </Box>
-                </Typography>
+                </Typography> */}
                 <div>
                     <Grid item xs={12}>
                         <div className={this.props.classes.playButtonDiv}>
@@ -353,12 +353,20 @@ class GameLaunch extends Component {
                         </Grid>
                         <div>
                             <Typography component="div" gutterBottom>
-                                <Box fontSize={16} textAlign="center">
+                                <Box
+                                    fontFamily="Helvetica Neue"
+                                    fontSize={20}
+                                    textAlign="center"
+                                >
                                     Test Your Recycling Skills
                                 </Box>
                             </Typography>
                             <Typography component="div" gutterBottom>
-                                <Box fontSize={16} textAlign="center">
+                                <Box
+                                    fontSize={20}
+                                    textAlign="center"
+                                    fontFamily="Helvetica Neue"
+                                >
                                     If you want to create a contest for your
                                     organization, click{' '}
                                     <a
@@ -380,7 +388,7 @@ class GameLaunch extends Component {
                         alignContent="center"
                     >
                         <Grid item xs={12}>
-                            {!this.state.contestPlayReady && (
+                            {/* {!this.state.contestPlayReady && (
                                 <div
                                     className={this.props.classes.playButtonDiv}
                                 >
@@ -393,9 +401,9 @@ class GameLaunch extends Component {
                                         PLAY!
                                     </Button>
                                 </div>
-                            )}
+                            )} */}
                             {/* conditionally render CompostBinChoice when play is clicked */}
-                            {this.state.timeToPlay && <CompostBinChoice />}
+                            <CompostBinChoice />
                         </Grid>
                     </Grid>
                     <Grid container spacing={24}>

@@ -10,7 +10,7 @@ const styles = {
     compostDiv: {
         // backgroundColor: "grey",
         borderRadius: '25px',
-        width: 300,
+        // width: 300,
     },
     compostDivHolderDiv: {
         display: 'flex',
@@ -23,12 +23,12 @@ const styles = {
     compostButtons: {
         display: 'flex',
         margin: 'auto',
-        width: 'auto',
+        width: 'fit-content',
         padding: 10,
     },
     button: {
         padding: 10,
-        width: 300,
+        width: 'auto',
         margin: 10,
         borderRadius: 25,
         border: '2px solid black',
@@ -64,7 +64,7 @@ class CompostBinChoice extends Component {
                             variant="contained"
                             onClick={this.compostClick}
                         >
-                            Three Stream
+                            Play with Trash, Recycling & Organics Recycling
                         </Button>
                         <Button
                             className={this.props.classes.button}
@@ -72,7 +72,7 @@ class CompostBinChoice extends Component {
                             variant="contained"
                             onClick={this.noCompostClick}
                         >
-                            Two Stream
+                            Play with Trash & Recycling
                         </Button>
                     </div>
                 </div>
