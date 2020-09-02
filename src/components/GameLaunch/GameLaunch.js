@@ -22,6 +22,7 @@ import DialogActions from '@material-ui/core/DialogActions'
 import Paper from '@material-ui/core/Paper'
 import CompostBinModal from '../CompostBinModal/CompostBinModal'
 import Moment from 'react-moment'
+import './GameLaunch.css'
 
 const MySwal = withReactContent(Swal)
 
@@ -112,9 +113,9 @@ const styles = {
         fontSize: 'calc(15px + 2vmin)',
         paddingRight: '-40px',
     },
-    mainDiv: {
-        backgroundColor: 'lightGrey',
-    },
+    // mainDiv: {
+    //     backgroundColor: 'lightGrey',
+    // },
     nameHeader: {
         fontFamily: 'chunk',
     },
@@ -265,6 +266,11 @@ class GameLaunch extends Component {
         })
     }
 
+    goToRegister = () => {
+        console.log('boop')
+        this.props.history.push('/register')
+    }
+
     handleLeaderboardClick = () => {
         let contestIdParam = this.props.history.location.search
         this.props.history.push(`/leaderboard${contestIdParam}`)
@@ -334,7 +340,7 @@ class GameLaunch extends Component {
                     >
                         <Grid item xs={12}>
                             <div>
-                                <Typography component="div" gutterBottom>
+                                {/* <Typography component="div" gutterBottom>
                                     <Box
                                         fontSize="h5.fontSize"
                                         textAlign="center"
@@ -342,20 +348,25 @@ class GameLaunch extends Component {
                                         Welcome to KNOW WHAT TO THROW, the game
                                         that tests your recycling skills
                                     </Box>
-                                </Typography>
+                                </Typography> */}
                             </div>
                         </Grid>
                         <div>
                             <Typography component="div" gutterBottom>
                                 <Box fontSize={16} textAlign="center">
-                                    Click PLAY to get started, or HOW TO PLAY to
-                                    view the tutorial
+                                    Test Your Recycling Skills
                                 </Box>
                             </Typography>
                             <Typography component="div" gutterBottom>
                                 <Box fontSize={16} textAlign="center">
                                     If you want to create a contest for your
-                                    organization, click REGISTER
+                                    organization, click{' '}
+                                    <a
+                                        class="registerLink"
+                                        onClick={this.goToRegister}
+                                    >
+                                        Register
+                                    </a>{' '}
                                 </Box>
                             </Typography>
                         </div>
