@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import TextField from '@material-ui/core/TextField'
 import Swal from 'sweetalert2'
+import { Header } from 'semantic-ui-react'
 import withReactContent from 'sweetalert2-react-content'
 import Help from '@material-ui/icons/Help'
 import PlayArrow from '@material-ui/icons/PlayArrow'
@@ -23,6 +24,7 @@ import Paper from '@material-ui/core/Paper'
 import CompostBinModal from '../CompostBinModal/CompostBinModal'
 import Moment from 'react-moment'
 import './GameLaunch.css'
+import { from } from 'form-data'
 
 const MySwal = withReactContent(Swal)
 
@@ -322,6 +324,12 @@ class GameLaunch extends Component {
                     </Box>
                 </Typography> */}
                 <div>
+                    {activeContest && (
+                        <Header size="huge">
+                            Welcome to the{' '}
+                            {this.props.currentContest.contest_name} CONTEST!
+                        </Header>
+                    )}
                     <Grid item xs={12}>
                         <div className={this.props.classes.playButtonDiv}>
                             <Button
