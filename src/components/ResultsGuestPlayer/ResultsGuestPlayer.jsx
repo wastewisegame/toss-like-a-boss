@@ -80,6 +80,13 @@ class ResultsGuestPlayer extends Component {
                 teamIdNumber: this.props.teamIdNumber,
             },
         })
+        const payloadObject = this.props.history.location.search
+            .split('=')
+            .pop()
+        this.props.dispatch({
+            type: 'FETCH_LEADERBOARD',
+            payload: payloadObject,
+        })
     }
 
     playAgain = () => {

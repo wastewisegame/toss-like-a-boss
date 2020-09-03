@@ -29,24 +29,31 @@ const styles = (theme) => ({
 
 class Leaderboard extends Component {
     componentDidMount() {
-        this.getLeaderboardInfo()
+        // this.getLeaderboardInfo()
     }
 
     getLeaderboardInfo() {
-        axios
-            .get(
-                `api/score/leaderboard/${this.props.history.location.search
-                    .split('=')
-                    .pop()}`
-            )
-            .then((response) => {
-                console.log('leaderboard fetch during DidMount', response.data)
-                this.props.dispatch({
-                    type: 'SET_LEADERBOARD',
-                    payload: response.data,
-                })
-            })
-            .catch((e) => console.log('error getting leaderboard: ', e))
+        // const payloadObject = this.props.history.location.search
+        //     .split('=')
+        //     .pop()
+        // this.props.dispatch({
+        //     type: 'FETCH_LEADERBOARD',
+        //     payload: payloadObject,
+        // })
+        // axios
+        //     .get(
+        //         `api/score/leaderboard/${this.props.history.location.search
+        //             .split('=')
+        //             .pop()}`
+        //     )
+        //     .then((response) => {
+        //         console.log('leaderboard fetch during DidMount', response.data)
+        //         this.props.dispatch({
+        //             type: 'SET_LEADERBOARD',
+        //             payload: response.data,
+        //         })
+        //     })
+        //     .catch((e) => console.log('error getting leaderboard: ', e))
         // const contestIdNumber = this.props.history.location.search
         //     .split('=')
         //     .pop()
