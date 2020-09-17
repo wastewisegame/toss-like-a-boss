@@ -29,7 +29,7 @@ const styles = {
     },
     resultsDiv: {
         backgroundColor: 'lightgrey',
-        opacity: 0.8,
+        // opacity: 0.8,
         fontFamily: 'Helvetica Neue',
     },
     leaderboardButton: {
