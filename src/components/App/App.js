@@ -52,7 +52,7 @@ class App extends Component {
           <Router>
             <div>
               <Nav />
-              <Container>
+              <Container className>
                 <Typography color="secondary">
                   <Switch>
                     {/* Visiting localhost:3000 will redirect to localhost:3000/home */}

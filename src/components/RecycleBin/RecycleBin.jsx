@@ -20,7 +20,7 @@ const style = {
 //sets attributes so recycle div is draggable
 const RecycleBin = ({ canDrop, isOver, connectDropTarget }) => {
   const isActive = canDrop && isOver;
-  let backgroundColor = "rgb(189,183,107,.6)";
+  let backgroundColor = "rgb(189,183,107,.9)";
   if (isActive) {
     //changes background color to darkgreen when being dragged
     backgroundColor = "darkgreen";

@@ -23,6 +23,9 @@ body {
     background-size: cover;
 }
 
+.mainContainer {
+}
+
 .alert {
     background-color: #ff4545;
     margin: 50px;
