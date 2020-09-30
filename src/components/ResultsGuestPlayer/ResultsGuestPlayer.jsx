@@ -85,13 +85,13 @@ class ResultsGuestPlayer extends Component {
     playAgain = () => {
         //if they are a contest player with search params, push to gamelaunch with those params
         //or push to regular gamelaunch page if not
-        if (this.props.history.location.search) {
-            this.props.history.push(
-                `/gamelaunch${this.props.history.location.search}`
-            )
-        } else {
-            this.props.history.push('/gamelaunch')
-        }
+        // if (this.props.history.location.search) {
+        //     this.props.history.push(
+        //         `/gamelaunch${this.props.history.location.search}`
+        //     )
+        // } else {
+        this.props.history.push('/gamelaunch')
+        // }
     }
 
     handleLeaderboardClick = () => {
