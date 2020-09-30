@@ -90,6 +90,10 @@ class ResultsGuestPlayer extends Component {
         //         `/gamelaunch${this.props.history.location.search}`
         //     )
         // } else {
+        this.props.dispatch({
+            type: 'CURRENT_CONTEST_USER_PLAYED_AGAIN',
+        })
+
         this.props.history.push('/gamelaunch')
         // }
     }
