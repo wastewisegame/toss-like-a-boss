@@ -31,6 +31,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
+import { withRouter } from 'react-router'
 
 //Declaring SweetAlert for use later in this file
 const MySwal = withReactContent(Swal)
@@ -269,6 +270,7 @@ class Contests extends Component {
     goToScoreboard = (accessCode) => {
         // console.log(accessCode)
         this.props.dispatch({ type: 'FETCH_LEADERBOARD', payload: accessCode })
+        this.props.history.push('/leaderboard')
     }
 
     //Allows the link with the generated contest access code to be copied to the user's clipboard
@@ -994,4 +996,4 @@ const mapStateToProps = (reduxStore) => {
         contest: reduxStore.contestSettings,
     }
 }
-export default connect(mapStateToProps)(withStyles(styles)(Contests))
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(Contests)))
