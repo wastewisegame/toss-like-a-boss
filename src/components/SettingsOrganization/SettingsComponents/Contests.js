@@ -1,25 +1,47 @@
 //Imports (React, Material-UI, Redux, SweetAlert)
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import { Backdrop, Card, CardActions, CardContent, FormControl, FormControlLabel, FormLabel, Grid, MenuItem, Modal, Radio, RadioGroup, TextField } from "@material-ui/core";
-import { AddCircle, Edit, Cancel, Save, Delete, Link, Close } from '@material-ui/icons';
-import { withStyles } from '@material-ui/styles';
-import { connect } from 'react-redux';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
+import React, { Component } from 'react'
+import Button from '@material-ui/core/Button'
+import {
+    Backdrop,
+    Card,
+    CardActions,
+    CardContent,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    Grid,
+    MenuItem,
+    Modal,
+    Radio,
+    RadioGroup,
+    TextField,
+} from '@material-ui/core'
+import {
+    AddCircle,
+    Edit,
+    Cancel,
+    Save,
+    Delete,
+    Link,
+    Close,
+} from '@material-ui/icons'
+import { withStyles } from '@material-ui/styles'
+import { connect } from 'react-redux'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import Snackbar from '@material-ui/core/Snackbar'
+import IconButton from '@material-ui/core/IconButton'
 
 //Declaring SweetAlert for use later in this file
 const MySwal = withReactContent(Swal)
 
 //Styles for Material-UI Components
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         flexGrow: 1,
     },
     close: {
-        padding: theme.spacing.unit / 2
+        padding: theme.spacing.unit / 2,
     },
     card: {
         textAlign: 'center',
@@ -30,24 +52,24 @@ const styles = theme => ({
     },
     cardHeader: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     cardContent: {
-        fontSize: 14
+        fontSize: 14,
     },
     cardContentLeft: {
         fontSize: 20,
-        width: 10
+        width: 10,
     },
     cardContentIcons: {
         fontSize: 20,
         paddingLeft: 5,
-        paddingRight: 5
+        paddingRight: 5,
     },
     cardContentContest: {
         fontSize: 20,
         paddingLeft: 8,
-        textAlign: 'align'
+        textAlign: 'align',
     },
     icon: {
         width: 35,
@@ -59,30 +81,30 @@ const styles = theme => ({
         margin: 5,
         width: 240,
         '&:hover:not($disabled):not($cssFocused):not($error) $notchedOutline': {
-            borderColor: "black"
-        }
+            borderColor: 'black',
+        },
     },
     fieldLarge: {
         margin: 5,
         width: 490,
         '&:hover:not($disabled):not($cssFocused):not($error) $notchedOutline': {
-            borderColor: "black"
-        }
+            borderColor: 'black',
+        },
     },
     edit: {
-        width: "10%"
+        width: '10%',
     },
     delete: {
-        width: "10%"
+        width: '10%',
     },
     contestName: {
-        width: "55%"
+        width: '55%',
     },
     contestLink: {
-        width: "25%"
+        width: '25%',
     },
     td: {
-        textAlign: "center"
+        textAlign: 'center',
     },
     modal: {
         display: 'flex',
@@ -95,27 +117,26 @@ const styles = theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
         color: theme.palette.secondary.main,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     input: {
-        color: "black"
+        color: 'black',
     },
     cssLabel: {
         '&$cssFocused': {
-            color: "black",
+            color: 'black',
         },
     },
     cssOutlinedInput: {
         '&$cssFocused $notchedOutline': {
-            borderColor: "black",
+            borderColor: 'black',
         },
     },
     cssFocused: {},
-    notchedOutline: { borderColor: "black" }
-});
+    notchedOutline: { borderColor: 'black' },
+})
 
 class Contests extends Component {
-
     state = {
         contestName: '',
         contestStartDate: '',
@@ -132,25 +153,33 @@ class Contests extends Component {
 
     //Load contests to the DOM
     componentDidMount() {
-        this.getContests();
+        this.getContests()
     }
 
     //Function to get the contests, included in componentDidMount
     getContests() {
         this.props.dispatch({
-            type: 'FETCH_CONTESTS'
+            type: 'FETCH_CONTESTS',
         })
     }
 
     //Saves any changes to form fields to state as users make edits
     handleChangeFor = (propertyName) => (event) => {
         this.setState({
-            [propertyName]: event.target.value
-        });
+            [propertyName]: event.target.value,
+        })
     }
 
     //Initializes contest fields with its saved values upon edit
-    handleContestEditOpen = (name, startDate, startTime, endDate, endTime, compost, id) => {
+    handleContestEditOpen = (
+        name,
+        startDate,
+        startTime,
+        endDate,
+        endTime,
+        compost,
+        id
+    ) => {
         this.setState({
             contestEditOpen: !this.state.contestEditOpen,
             contestName: name,
@@ -158,17 +187,17 @@ class Contests extends Component {
             contestStartTime: startTime,
             contestEndDate: endDate,
             contestEndTime: endTime,
-            contestCompostBin: compost ? "true" : "false",
-            contestNameId: id
+            contestCompostBin: compost ? 'true' : 'false',
+            contestNameId: id,
         })
-    };
+    }
 
     //Triggers display of modal with form to enter new contest information
     handleContestAddOpen = () => {
         this.setState({
             contestAddOpen: !this.state.contestAddOpen,
         })
-    };
+    }
 
     //Closes the modal for the contest
     handleContestClose = () => {
@@ -183,32 +212,33 @@ class Contests extends Component {
             contestAccessCode: '',
             contestCompostBin: '',
         })
-    };
+    }
 
     //Handles PUT request (edit) of contest details for a specific contest
     handleEdit = (event) => {
-        event.preventDefault();
+        event.preventDefault()
         this.props.dispatch({
             type: 'UPDATE_CONTEST',
-            payload: this.state
+            payload: this.state,
         })
-        this.handleContestClose();
+        this.handleContestClose()
     }
 
     //Handles POST request of contest details to enter a brand new contest
     handleAdd = (event) => {
-        event.preventDefault();
-        this.generateAccessId();
+        event.preventDefault()
+        this.generateAccessId()
         this.props.dispatch({
             type: 'ADD_CONTEST',
-            payload: this.state
+            payload: this.state,
         })
-        this.handleContestClose();
+        this.handleContestClose()
     }
 
     //Generates a random, nine-digit number to be used as the Contest ID
     generateAccessId() {
-        this.state.contestAccessCode = Math.floor(Math.random() * 900000000) + 100000000;
+        this.state.contestAccessCode =
+            Math.floor(Math.random() * 900000000) + 100000000
     }
 
     //Handles the delete for a contest from the database, with a SweetAlert requiring users to confirm their decisions
@@ -220,12 +250,12 @@ class Contests extends Component {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Delete'
+            confirmButtonText: 'Delete',
         }).then((result) => {
             if (result.value) {
                 this.props.dispatch({
                     type: 'DELETE_CONTEST',
-                    payload: id
+                    payload: id,
                 })
                 Swal.fire(
                     'Deleted!',
@@ -236,52 +266,75 @@ class Contests extends Component {
         })
     }
 
+    goToScoreboard = (accessCode) => {
+        // console.log(accessCode)
+        this.props.dispatch({ type: 'FETCH_LEADERBOARD', payload: accessCode })
+    }
+
     //Allows the link with the generated contest access code to be copied to the user's clipboard
     copyLink = (code) => {
-        this.setState({ snackBarShowOpen: true });
-        let dummy = document.createElement("textarea");
+        this.setState({ snackBarShowOpen: true })
+        let dummy = document.createElement('textarea')
         let currentUrl = window.location.href
-        let newUrl = '';
+        let newUrl = ''
         for (let each of currentUrl) {
             if (each !== '#') {
                 newUrl += each
             } else if (each == '#') {
-                break;
+                break
             }
         }
         newUrl += '#/gamelaunch?contest='
         newUrl += code
-        document.body.appendChild(dummy);
-        dummy.value = newUrl;
-        dummy.select();
-        document.execCommand("copy");
-        document.body.removeChild(dummy);
+        document.body.appendChild(dummy)
+        dummy.value = newUrl
+        dummy.select()
+        document.execCommand('copy')
+        document.body.removeChild(dummy)
     }
 
     //Allows users to close the "copied link to clipboard" snackbar
     handleSnackShowClose = (event, reason) => {
-        if (reason === "clickaway") {
-            return;
+        if (reason === 'clickaway') {
+            return
         }
-        this.setState({ snackBarShowOpen: false });
-    };
+        this.setState({ snackBarShowOpen: false })
+    }
 
     render() {
-
         //Allows for classes when using Material-UI styling.
         const { classes } = this.props
 
         //Contest list variable, containing a loop to display all contests in the database to the DOM in a table format.
-        let contestList = this.props.contest.map(contest => {
+        let contestList = this.props.contest.map((contest) => {
             return (
                 <tr>
                     <td className={classes.cardContentIconsLeft}>
-                        <Button onClick={() => this.handleContestEditOpen(contest.contest_name, contest.start_date, contest.start_time, contest.end_date, contest.end_time, contest.compost, contest.id)}>
+                        <Button
+                            onClick={() =>
+                                this.handleContestEditOpen(
+                                    contest.contest_name,
+                                    contest.start_date,
+                                    contest.start_time,
+                                    contest.end_date,
+                                    contest.end_time,
+                                    contest.compost,
+                                    contest.id
+                                )
+                            }
+                        >
                             <Edit />
                         </Button>
                     </td>
                     <td className={classes.cardContentIcons}>
-                        <Button onClick={() => this.handleDelete(contest.contest_name, contest.id)}>
+                        <Button
+                            onClick={() =>
+                                this.handleDelete(
+                                    contest.contest_name,
+                                    contest.id
+                                )
+                            }
+                        >
                             <Delete />
                         </Button>
                     </td>
@@ -289,8 +342,20 @@ class Contests extends Component {
                         {contest.contest_name}
                     </td>
                     <td>
-                        <Button onClick={() => this.copyLink(contest.access_code)}>
-                            Copy Link<Link style={{ marginLeft: 3 }} />
+                        <Button
+                            onClick={() => this.copyLink(contest.access_code)}
+                        >
+                            Copy Link
+                            <Link style={{ marginLeft: 3 }} />
+                        </Button>
+                    </td>
+                    <td>
+                        <Button
+                            onClick={() =>
+                                this.goToScoreboard(contest.access_code)
+                            }
+                        >
+                            Scores
                         </Button>
                     </td>
                 </tr>
@@ -302,68 +367,107 @@ class Contests extends Component {
         for (let i = 0; i < 24; i++) {
             let hourFormat = {
                 displayValue: 0,
-                sqlValue: 0
+                sqlValue: 0,
             }
-            hourFormat.sqlValue = i;
+            hourFormat.sqlValue = i
             if (i == 0) {
                 hourFormat.displayValue = '12 am'
-                hourSelection.push(hourFormat);
+                hourSelection.push(hourFormat)
             } else if (i < 12) {
                 hourFormat.displayValue = i + ' am'
-                hourSelection.push(hourFormat);
+                hourSelection.push(hourFormat)
             } else if (i == 12) {
                 hourFormat.displayValue = '12 pm'
                 hourSelection.push(hourFormat)
             } else if (i <= 23) {
-                let j = i;
+                let j = i
                 hourFormat.displayValue = j - 12 + ' pm'
-                hourSelection.push(hourFormat);
+                hourSelection.push(hourFormat)
             }
         }
 
         return (
             <div>
                 <Grid container spacing={4} justify="center">
-                    <Grid item sm={3}>
-                    </Grid>
+                    <Grid item sm={3}></Grid>
                     <Grid item sm={6}>
                         <Card className={classes.card}>
-                            <CardActions style={{ backgroundColor: "#EEF1F1" }}>
-                                <Grid item sm={5}>
-                                </Grid>
+                            <CardActions style={{ backgroundColor: '#EEF1F1' }}>
+                                <Grid item sm={5}></Grid>
                                 <Grid item sm={2}>
-                                    <span className={classes.cardHeader} style={{ marginLeft: "auto" }}>Contests</span>
+                                    <span
+                                        className={classes.cardHeader}
+                                        style={{ marginLeft: 'auto' }}
+                                    >
+                                        Contests
+                                    </span>
                                 </Grid>
-                                <Grid item sm={5} style={{ textAlign: "right" }}>
-                                    <Button onClick={() => this.handleContestAddOpen()} style={{ marginLeft: "auto", }}>
-                                        <AddCircle style={{ marginRight: 3 }} />Add New Contest
+                                <Grid
+                                    item
+                                    sm={5}
+                                    style={{ textAlign: 'right' }}
+                                >
+                                    <Button
+                                        onClick={() =>
+                                            this.handleContestAddOpen()
+                                        }
+                                        style={{ marginLeft: 'auto' }}
+                                    >
+                                        <AddCircle style={{ marginRight: 3 }} />
+                                        Add New Contest
                                     </Button>
                                 </Grid>
                             </CardActions>
-                            <CardContent style={{ backgroundColor: "#EEF1F1" }}>
+                            <CardContent style={{ backgroundColor: '#EEF1F1' }}>
                                 {!this.props.contest[0] && <br />}
                                 {!this.props.contest[0] && <br />}
-                                {!this.props.contest[0] &&
-                                    <span className={classes.cardContent}>You have not added any contests.  Get started by clicking the <b>Add New Contest</b> button!</span>
-                                }
-                                {this.props.contest[0] && <table className={classes.tableContest}>
-                                    <thead>
-                                        <tr>
-                                            <th className={classes.edit}>Edit</th>
-                                            <th className={classes.delete}>Delete</th>
-                                            <th className={classes.contestName}>Contest Name</th>
-                                            <th className={classes.contestLink}>Contest Link</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {contestList}
-                                    </tbody>
-                                </table>}
+                                {!this.props.contest[0] && (
+                                    <span className={classes.cardContent}>
+                                        You have not added any contests. Get
+                                        started by clicking the{' '}
+                                        <b>Add New Contest</b> button!
+                                    </span>
+                                )}
+                                {this.props.contest[0] && (
+                                    <table className={classes.tableContest}>
+                                        <thead>
+                                            <tr>
+                                                <th className={classes.edit}>
+                                                    Edit
+                                                </th>
+                                                <th className={classes.delete}>
+                                                    Delete
+                                                </th>
+                                                <th
+                                                    className={
+                                                        classes.contestName
+                                                    }
+                                                >
+                                                    Contest Name
+                                                </th>
+                                                <th
+                                                    className={
+                                                        classes.contestLink
+                                                    }
+                                                >
+                                                    Contest Link
+                                                </th>
+                                                <th
+                                                    className={
+                                                        classes.contestLink
+                                                    }
+                                                >
+                                                    Leaderboard
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>{contestList}</tbody>
+                                    </table>
+                                )}
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item sm={3}>
-                    </Grid>
+                    <Grid item sm={3}></Grid>
                 </Grid>
 
                 <Modal
@@ -378,8 +482,10 @@ class Contests extends Component {
                         timeout: 500,
                     }}
                 >
-                    <CardContent className={classes.form} style={{ backgroundColor: "#EEF1F1" }}>
-                        
+                    <CardContent
+                        className={classes.form}
+                        style={{ backgroundColor: '#EEF1F1' }}
+                    >
                         <form onSubmit={this.handleEdit}>
                             <div>
                                 <TextField
@@ -388,7 +494,9 @@ class Contests extends Component {
                                     label="contest name"
                                     className={classes.fieldLarge}
                                     value={this.state.contestName}
-                                    onChange={this.handleChangeFor('contestName')}
+                                    onChange={this.handleChangeFor(
+                                        'contestName'
+                                    )}
                                     margin="normal"
                                     variant="outlined"
                                     InputProps={{
@@ -396,12 +504,13 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 />
                             </div>
@@ -413,7 +522,9 @@ class Contests extends Component {
                                     label="contest start date"
                                     className={classes.fieldMedium}
                                     value={this.state.contestStartDate}
-                                    onChange={this.handleChangeFor('contestStartDate')}
+                                    onChange={this.handleChangeFor(
+                                        'contestStartDate'
+                                    )}
                                     margin="normal"
                                     variant="outlined"
                                     InputProps={{
@@ -421,12 +532,13 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 />
                                 <TextField
@@ -436,7 +548,9 @@ class Contests extends Component {
                                     label="contest start time"
                                     className={classes.fieldMedium}
                                     value={this.state.contestStartTime}
-                                    onChange={this.handleChangeFor('contestStartTime')}
+                                    onChange={this.handleChangeFor(
+                                        'contestStartTime'
+                                    )}
                                     SelectProps={{
                                         MenuProps: {
                                             className: classes.status,
@@ -449,19 +563,24 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 >
-                                    {hourSelection.map((hour) =>
-                                        <MenuItem key={hour.sqlValue} value={hour.sqlValue} className={classes.timeOptions}>
+                                    {hourSelection.map((hour) => (
+                                        <MenuItem
+                                            key={hour.sqlValue}
+                                            value={hour.sqlValue}
+                                            className={classes.timeOptions}
+                                        >
                                             {hour.displayValue}
                                         </MenuItem>
-                                    )}
+                                    ))}
                                 </TextField>
                             </div>
                             <div>
@@ -472,7 +591,9 @@ class Contests extends Component {
                                     label="contest end date"
                                     className={classes.fieldMedium}
                                     value={this.state.contestEndDate}
-                                    onChange={this.handleChangeFor('contestEndDate')}
+                                    onChange={this.handleChangeFor(
+                                        'contestEndDate'
+                                    )}
                                     margin="normal"
                                     variant="outlined"
                                     InputProps={{
@@ -480,12 +601,13 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 />
                                 <TextField
@@ -495,7 +617,9 @@ class Contests extends Component {
                                     label="contest end time"
                                     className={classes.fieldMedium}
                                     value={this.state.contestEndTime}
-                                    onChange={this.handleChangeFor('contestEndTime')}
+                                    onChange={this.handleChangeFor(
+                                        'contestEndTime'
+                                    )}
                                     SelectProps={{
                                         MenuProps: {
                                             className: classes.status,
@@ -508,28 +632,59 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 >
-                                    {hourSelection.map((hour) =>
-                                        <MenuItem key={hour.sqlValue} value={hour.sqlValue} className={classes.timeOptions}>
+                                    {hourSelection.map((hour) => (
+                                        <MenuItem
+                                            key={hour.sqlValue}
+                                            value={hour.sqlValue}
+                                            className={classes.timeOptions}
+                                        >
                                             {hour.displayValue}
                                         </MenuItem>
-                                    )}
+                                    ))}
                                 </TextField>
                             </div>
                             <div>
                                 <br />
-                                <FormControl component="fieldset" className={classes.radio}>
-                                    <FormLabel component="legend" style={{ color: "black" }}>Should your game include an option for a compost bin?</FormLabel>
-                                    <RadioGroup aria-label="compost bin" name="compostBin" defaultValue={this.state.contestCompostBin} onChange={this.handleChangeFor('contestCompostBin')}>
-                                        <FormControlLabel value="true" control={<Radio />} label="Yes" />
-                                        <FormControlLabel value="false" control={<Radio />} label="No" />
+                                <FormControl
+                                    component="fieldset"
+                                    className={classes.radio}
+                                >
+                                    <FormLabel
+                                        component="legend"
+                                        style={{ color: 'black' }}
+                                    >
+                                        Should your game include an option for a
+                                        compost bin?
+                                    </FormLabel>
+                                    <RadioGroup
+                                        aria-label="compost bin"
+                                        name="compostBin"
+                                        defaultValue={
+                                            this.state.contestCompostBin
+                                        }
+                                        onChange={this.handleChangeFor(
+                                            'contestCompostBin'
+                                        )}
+                                    >
+                                        <FormControlLabel
+                                            value="true"
+                                            control={<Radio />}
+                                            label="Yes"
+                                        />
+                                        <FormControlLabel
+                                            value="false"
+                                            control={<Radio />}
+                                            label="No"
+                                        />
                                     </RadioGroup>
                                 </FormControl>
                             </div>
@@ -539,20 +694,23 @@ class Contests extends Component {
                                     name="cancel"
                                     color="secondary"
                                     onClick={() => this.handleContestClose()}
-                                    style={{ marginTop: 10, marginRight: 10 }}>
-                                    <Cancel style={{ marginRight: 3 }} />Cancel
+                                    style={{ marginTop: 10, marginRight: 10 }}
+                                >
+                                    <Cancel style={{ marginRight: 3 }} />
+                                    Cancel
                                 </Button>
                                 <Button
                                     variant="contained"
                                     type="submit"
                                     name="submit"
                                     color="primary"
-                                    style={{ marginTop: 10 }}>
-                                    <Save style={{ marginRight: 3 }} />Save
-                         </Button>
+                                    style={{ marginTop: 10 }}
+                                >
+                                    <Save style={{ marginRight: 3 }} />
+                                    Save
+                                </Button>
                             </div>
                         </form>
-
                     </CardContent>
                 </Modal>
 
@@ -568,8 +726,10 @@ class Contests extends Component {
                         timeout: 500,
                     }}
                 >
-                    <CardContent className={classes.form} style={{ backgroundColor: "#EEF1F1" }}>
-
+                    <CardContent
+                        className={classes.form}
+                        style={{ backgroundColor: '#EEF1F1' }}
+                    >
                         <form onSubmit={this.handleAdd}>
                             <div>
                                 <TextField
@@ -578,7 +738,9 @@ class Contests extends Component {
                                     label="contest name"
                                     className={classes.fieldLarge}
                                     value={this.state.contestName}
-                                    onChange={this.handleChangeFor('contestName')}
+                                    onChange={this.handleChangeFor(
+                                        'contestName'
+                                    )}
                                     margin="normal"
                                     variant="outlined"
                                     InputProps={{
@@ -586,12 +748,13 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 />
                             </div>
@@ -603,7 +766,9 @@ class Contests extends Component {
                                     label="contest start date"
                                     className={classes.fieldMedium}
                                     value={this.state.contestStartDate}
-                                    onChange={this.handleChangeFor('contestStartDate')}
+                                    onChange={this.handleChangeFor(
+                                        'contestStartDate'
+                                    )}
                                     margin="normal"
                                     variant="outlined"
                                     InputProps={{
@@ -611,12 +776,13 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 />
                                 <TextField
@@ -626,7 +792,9 @@ class Contests extends Component {
                                     label="contest start time"
                                     className={classes.fieldMedium}
                                     value={this.state.contestStartTime}
-                                    onChange={this.handleChangeFor('contestStartTime')}
+                                    onChange={this.handleChangeFor(
+                                        'contestStartTime'
+                                    )}
                                     SelectProps={{
                                         MenuProps: {
                                             className: classes.status,
@@ -639,19 +807,24 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 >
-                                    {hourSelection.map((hour) =>
-                                        <MenuItem key={hour.sqlValue} value={hour.sqlValue} className={classes.timeOptions}>
+                                    {hourSelection.map((hour) => (
+                                        <MenuItem
+                                            key={hour.sqlValue}
+                                            value={hour.sqlValue}
+                                            className={classes.timeOptions}
+                                        >
                                             {hour.displayValue}
                                         </MenuItem>
-                                    )}
+                                    ))}
                                 </TextField>
                             </div>
                             <div>
@@ -662,7 +835,9 @@ class Contests extends Component {
                                     label="contest end date"
                                     className={classes.fieldMedium}
                                     value={this.state.contestEndDate}
-                                    onChange={this.handleChangeFor('contestEndDate')}
+                                    onChange={this.handleChangeFor(
+                                        'contestEndDate'
+                                    )}
                                     margin="normal"
                                     variant="outlined"
                                     InputProps={{
@@ -670,12 +845,13 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 />
                                 <TextField
@@ -685,7 +861,9 @@ class Contests extends Component {
                                     label="contest end time"
                                     className={classes.fieldMedium}
                                     value={this.state.contestEndTime}
-                                    onChange={this.handleChangeFor('contestEndTime')}
+                                    onChange={this.handleChangeFor(
+                                        'contestEndTime'
+                                    )}
                                     SelectProps={{
                                         MenuProps: {
                                             className: classes.status,
@@ -698,28 +876,56 @@ class Contests extends Component {
                                         classes: {
                                             root: classes.cssOutlinedInput,
                                             focused: classes.cssFocused,
-                                            notchedOutline: classes.notchedOutline,
-                                        }
+                                            notchedOutline:
+                                                classes.notchedOutline,
+                                        },
                                     }}
                                     InputLabelProps={{
                                         className: classes.input,
-                                        shrink: true
+                                        shrink: true,
                                     }}
                                 >
-                                    {hourSelection.map((hour) =>
-                                        <MenuItem key={hour.sqlValue} value={hour.sqlValue} className={classes.timeOptions}>
+                                    {hourSelection.map((hour) => (
+                                        <MenuItem
+                                            key={hour.sqlValue}
+                                            value={hour.sqlValue}
+                                            className={classes.timeOptions}
+                                        >
                                             {hour.displayValue}
                                         </MenuItem>
-                                    )}
+                                    ))}
                                 </TextField>
                             </div>
                             <div>
                                 <br />
-                                <FormControl component="fieldset" className={classes.radio}>
-                                    <FormLabel component="legend" style={{ color: "black" }}>Should your game include an option for a compost bin?</FormLabel>
-                                    <RadioGroup aria-label="compost bin" name="compostBin" onChange={this.handleChangeFor('contestCompostBin')}>
-                                        <FormControlLabel value="true" control={<Radio />} label="Yes" />
-                                        <FormControlLabel value="false" control={<Radio />} label="No" />
+                                <FormControl
+                                    component="fieldset"
+                                    className={classes.radio}
+                                >
+                                    <FormLabel
+                                        component="legend"
+                                        style={{ color: 'black' }}
+                                    >
+                                        Should your game include an option for a
+                                        compost bin?
+                                    </FormLabel>
+                                    <RadioGroup
+                                        aria-label="compost bin"
+                                        name="compostBin"
+                                        onChange={this.handleChangeFor(
+                                            'contestCompostBin'
+                                        )}
+                                    >
+                                        <FormControlLabel
+                                            value="true"
+                                            control={<Radio />}
+                                            label="Yes"
+                                        />
+                                        <FormControlLabel
+                                            value="false"
+                                            control={<Radio />}
+                                            label="No"
+                                        />
                                     </RadioGroup>
                                 </FormControl>
                             </div>
@@ -729,47 +935,52 @@ class Contests extends Component {
                                     name="cancel"
                                     color="secondary"
                                     onClick={() => this.handleContestClose()}
-                                    style={{ marginTop: 10, marginRight: 10 }}>
-                                    <Cancel style={{ marginRight: 3 }} />Cancel
+                                    style={{ marginTop: 10, marginRight: 10 }}
+                                >
+                                    <Cancel style={{ marginRight: 3 }} />
+                                    Cancel
                                 </Button>
                                 <Button
                                     variant="contained"
                                     type="submit"
                                     name="submit"
                                     color="primary"
-                                    style={{ marginTop: 10 }}>
-                                    <Save style={{ marginRight: 3 }} />Save
-                         </Button>
+                                    style={{ marginTop: 10 }}
+                                >
+                                    <Save style={{ marginRight: 3 }} />
+                                    Save
+                                </Button>
                             </div>
                         </form>
-
                     </CardContent>
                 </Modal>
 
                 <Snackbar
                     anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right"
+                        vertical: 'bottom',
+                        horizontal: 'right',
                     }}
                     open={this.state.snackBarShowOpen}
                     autoHideDuration={6000}
                     onClose={this.handleSnackShowClose}
                     ContentProps={{
-                        "aria-describedby": "message-id"
+                        'aria-describedby': 'message-id',
                     }}
-                    message={<span id='message-id'>Copied link to clipboard!</span>}
+                    message={
+                        <span id="message-id">Copied link to clipboard!</span>
+                    }
                     action={[
                         <IconButton
-                            key='close'
-                            aria-label='Close'
-                            color='inherit'
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
                             className={classes.close}
-                            onClick={this.handleSnackShowClose}>
+                            onClick={this.handleSnackShowClose}
+                        >
                             <Close />
-                        </IconButton>
+                        </IconButton>,
                     ]}
                 />
-
             </div>
         )
     }
@@ -780,7 +991,7 @@ const mapStateToProps = (reduxStore) => {
         user: reduxStore.user,
         team: reduxStore.teamSettings,
         organization: reduxStore.orgSettings,
-        contest: reduxStore.contestSettings
+        contest: reduxStore.contestSettings,
     }
 }
-export default connect(mapStateToProps)(withStyles(styles)(Contests));
+export default connect(mapStateToProps)(withStyles(styles)(Contests))

@@ -24,9 +24,8 @@ router.get('/', (req, res) => {
 
         pool.query(queryText)
             .then((result) => {
-                const { rows } = result // destructuring the value held on result.rows into its own variable declaration.
-
-                //since we're not making a new array of things, just mutating properties on the items in the array we can use a .forEach()
+                const { rows } = result 
+                //This allows us to see compost as garbage in a 2 bin game.
                 rows.forEach((rowItem) => {
                     if (rowItem.receptacle === 'compost') {
                         rowItem.receptacle = 'garbage'
