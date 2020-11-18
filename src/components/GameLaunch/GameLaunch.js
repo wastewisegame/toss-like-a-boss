@@ -437,6 +437,8 @@ class GameLaunch extends Component {
                             {activeContest && (
                                 <Button
                                     onClick={this.handleLeaderboardClick}
+                                    justify="center"
+                                    margin="auto"
                                     className={
                                         this.props.classes.contestPlayButton
                                     }
@@ -450,22 +452,33 @@ class GameLaunch extends Component {
                         </Grid>
                     </Grid>
                     {!activeContest && this.props.history.location.search && (
-                        <Card style={{ margin: 5, width: 'auto' }}>
-                            <CardContent>
-                                <div
-                                    style={{
-                                        fontSize: 18,
-                                        textAlign: 'center',
-                                    }}
+                        <div>
+                            <br></br>
+                            <Box
+                                fontFamily="Helvetica Neue"
+                                fontSize={20}
+                                textAlign="center"
+                                fontStyle="italics"
+                            >
+                                This contest has expired.
+                            </Box>
+
+                            <br />
+                            <br />
+                            <div className={this.props.classes.playButtonDiv}>
+                                <Button
+                                    onClick={this.handleLeaderboardClick}
+                                    className={
+                                        this.props.classes.contestPlayButton
+                                    }
                                 >
-                                    The contest you are trying to access has
-                                    either expired, or has not yet started.
-                                    <br />
-                                    <br />
-                                    Please feel free to play the game for fun!
-                                </div>
-                            </CardContent>
-                        </Card>
+                                    <PlayArrow
+                                        className={this.props.classes.svgIcon}
+                                    />
+                                    LEADERBOARD{' '}
+                                </Button>
+                            </div>
+                        </div>
                     )}
                     <div className={this.props.classes.contestDiv}>
                         <Grid item xs={12}></Grid>
