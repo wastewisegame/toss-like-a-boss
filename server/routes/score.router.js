@@ -23,6 +23,27 @@ router.get('/leaderboard/:id', (req, res) => {
         })
 })
 
+router.get('/leaderboard/all/:id', (req, res) => {
+    console.log('leaderboard GET req.body', req.params)
+    const queryText = `SELECT  "score".score, "score".first_name, "score".last_name, "score".time, "team".team_name FROM "score"
+                      LEFT JOIN "team" ON "score".team_id = "team".id 
+                      JOIN "contest" ON "score".contest_id = "contest".id
+                      WHERE "contest".access_code=$1 
+                      ORDER BY "score".score DESC, "score".time 
+                      ASC;`
+    contestId = req.params.id
+    console.log('contest id is', contestId)
+    pool.query(queryText, [contestId])
+        .then((results) => {
+            console.log(results.rows)
+            res.send(results.rows)
+        })
+        .catch((error) => {
+            console.log('error in server side leaderboard GET', error)
+            res.sendStatus(500)
+        })
+})
+
 router.get('/leaderboard/company/:id', (req, res) => {
     const queryText = `
   SELECT "contest".id from "contest"
