@@ -14,6 +14,21 @@ function* getLeaderboard(action) {
     } catch (error) {}
 }
 
+function* getAllContestEntries(action) {
+    console.log('GET ALL ENTRIES: ', action.payload)
+    try {
+        const response = yield axios.get(
+            `api/score/leaderboard/all/${action.payload}`
+        )
+        yield put({
+            type: 'SET_LEADERBOARD',
+            payload: response.data,
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 function* sendContestGameData(action) {
     console.log('SEND CONTEST DATA : ', action.payload)
     try {
@@ -49,6 +64,7 @@ function* fetchTeamIdNumber(action) {
 
 function* watchMe() {
     yield takeEvery('FETCH_LEADERBOARD', getLeaderboard)
+    yield takeEvery('FETCH_ALL_CONTEST_ENTRIES', getAllContestEntries)
     yield takeEvery('SEND_CONTEST_GAME_DATA', sendContestGameData)
     yield takeEvery('GET_COMPANY_ID', getCompanyId)
     yield takeEvery('FETCH_TEAM_ID_NUMBER', fetchTeamIdNumber)

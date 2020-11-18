@@ -278,6 +278,12 @@ class GameLaunch extends Component {
         this.props.history.push(`/leaderboard${contestIdParam}`)
     }
 
+    handleAllEntriesClick = () => {
+        let contestIdParam = this.props.history.location.search
+        console.log(contestIdParam)
+        this.props.history.push(`/scoreboard${contestIdParam}`)
+    }
+
     render() {
         const teamNameArray = this.props.teamNames.map((team, index) => {
             console.log('team name array builder: ', team)
@@ -435,19 +441,38 @@ class GameLaunch extends Component {
                         </Grid>
                         <Grid item item xs={6}>
                             {activeContest && (
-                                <Button
-                                    onClick={this.handleLeaderboardClick}
-                                    justify="center"
-                                    margin="auto"
-                                    className={
-                                        this.props.classes.contestPlayButton
-                                    }
-                                >
-                                    <PlayArrow
-                                        className={this.props.classes.svgIcon}
-                                    />
-                                    LEADERBOARD{' '}
-                                </Button>
+                                <>
+                                    <Button
+                                        onClick={this.handleLeaderboardClick}
+                                        justify="center"
+                                        margin="auto"
+                                        className={
+                                            this.props.classes.contestPlayButton
+                                        }
+                                    >
+                                        <PlayArrow
+                                            className={
+                                                this.props.classes.svgIcon
+                                            }
+                                        />
+                                        LEADERBOARD{' '}
+                                    </Button>
+                                    <Button
+                                        onClick={this.handleAllEntriesClick}
+                                        justify="center"
+                                        margin="auto"
+                                        className={
+                                            this.props.classes.contestPlayButton
+                                        }
+                                    >
+                                        <PlayArrow
+                                            className={
+                                                this.props.classes.svgIcon
+                                            }
+                                        />
+                                        ALL CONTEST ENTRIES{' '}
+                                    </Button>
+                                </>
                             )}
                         </Grid>
                     </Grid>
@@ -476,6 +501,19 @@ class GameLaunch extends Component {
                                         className={this.props.classes.svgIcon}
                                     />
                                     LEADERBOARD{' '}
+                                </Button>
+                                <Button
+                                    onClick={this.handleAllEntriesClick}
+                                    justify="center"
+                                    margin="auto"
+                                    className={
+                                        this.props.classes.contestPlayButton
+                                    }
+                                >
+                                    <PlayArrow
+                                        className={this.props.classes.svgIcon}
+                                    />
+                                    ALL CONTEST ENTRIES{' '}
                                 </Button>
                             </div>
                         </div>
